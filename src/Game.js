@@ -1,4 +1,5 @@
 Knugen.Game = function(game){
+
 };
 
 Knugen.Game.prototype = {
@@ -9,8 +10,10 @@ Knugen.Game.prototype = {
 		// display background
 		this.add.sprite(0, 0, 'background');
 
-		var castle = this.add.sprite(	Knugen.WIDTH/2,	50, 'castle');
-		castle.anchor.setTo(0.5);
+		this.castle = this.add.sprite(	Knugen.WIDTH/2,	50, 'castle');
+		this.castle.anchor.setTo(0.5);
+		this.game.physics.arcade.enable(this.castle);
+		this.castle.body.immovable = true;
 
 		var gate = this.add.sprite(	Knugen.WIDTH/2, 80, 'gate');
 		gate.anchor.setTo(0.5);
@@ -19,5 +22,6 @@ Knugen.Game.prototype = {
 		this.game.add.existing(this.knugen);
 	},
 	update: function(){
+		this.game.physics.arcade.collide(this.knugen, this.castle);
 	}
 };
