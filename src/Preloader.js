@@ -16,6 +16,7 @@ Knugen.Preloader.prototype = {
 		this.load.image('background', 'assets/Background.png');
 		this.load.image('castle', 'assets/Castle.png');
 		this.load.image('gate', 'assets/Gate.png');
+		this.load.image('kungen', 'assets/Tmp_knugen.png');
 
 		// load spritesheets
 		//this.load.spritesheet('button-start', 'assets/button-start.png', 200, 100);

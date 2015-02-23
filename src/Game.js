@@ -15,6 +15,8 @@ Knugen.Game.prototype = {
 		var gate = this.add.sprite(	Knugen.WIDTH/2, 80, 'gate');
 		gate.anchor.setTo(0.5);
 
+		this.knugen = new Kungen(this.game);
+		this.game.add.existing(this.knugen);
 	},
 	update: function(){
 	}
