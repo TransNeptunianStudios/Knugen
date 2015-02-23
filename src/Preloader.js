@@ -20,6 +20,7 @@ KnugenGame.Preloader.prototype = {
 		this.load.image('kungen90', 'assets/Tmp_knugen_90.png');
 		this.load.image('kungen180', 'assets/Tmp_knugen_180.png');
 		this.load.image('kungen270', 'assets/Tmp_knugen_270.png');
+		this.load.image('frog', 'assets/Frog.png');
 
 		// load spritesheets
 		//this.load.spritesheet('button-start', 'assets/button-start.png', 200, 100);
