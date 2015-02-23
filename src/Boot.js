@@ -1,6 +1,6 @@
-var Knugen = {};
-Knugen.Boot = function(game){};
-Knugen.Boot.prototype = {
+var KnugenGame = {};
+KnugenGame.Boot = function(game){};
+KnugenGame.Boot.prototype = {
 	preload: function(){
 		// preload the loading indicator first before anything else
 		this.load.image('preloaderBar', 'assets/Loading_bar.png');
