@@ -1,4 +1,4 @@
-Kungen = function(game) {
+Knugen = function(game) {
 
    Phaser.Sprite.call(this, game, game.world.width/2, game.world.height/2, 'kungen0');
 
@@ -12,10 +12,10 @@ Kungen = function(game) {
    this.imageMap = { '0' : 'kungen0', '1' : 'kungen90', '2' : 'kungen180', '3' : 'kungen270' }
 }
 
-Kungen.prototype = Object.create(Phaser.Sprite.prototype);
-Kungen.prototype.constructor = Kungen;
+Knugen.prototype = Object.create(Phaser.Sprite.prototype);
+Knugen.prototype.constructor = Knugen;
 
-Kungen.prototype.update = function() {
+Knugen.prototype.update = function() {
    if (this.game.input.activePointer.isDown) {
       var radToPointer = this.game.physics.arcade.angleToPointer(this, this.game.input.activePointer);
       this.body.velocity = this.game.physics.arcade.velocityFromRotation(radToPointer, 60);
@@ -27,7 +27,7 @@ Kungen.prototype.update = function() {
    }
 }
 
-Kungen.prototype.updateImage = function(deg) {
+Knugen.prototype.updateImage = function(deg) {
 
    var imageIndex = -1;
 

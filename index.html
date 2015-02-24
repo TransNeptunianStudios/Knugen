@@ -8,7 +8,7 @@
     <script src="src/Boot.js"></script>
     <script src="src/Preloader.js"></script>
     <script src="src/MainMenu.js"></script>
-    <script src="src/Kungen.js"></script>
+    <script src="src/Knugen.js"></script>
     <script src="src/Crowns.js"></script>
     <script src="src/Game.js"></script>
 </head>
@@ -16,10 +16,10 @@
 <script>
 (function() {
     var game = new Phaser.Game(240, 400, Phaser.CANVAS, 'Knugen');
-    game.state.add('Boot', Knugen.Boot);
-    game.state.add('Preloader', Knugen.Preloader);
-    game.state.add('MainMenu', Knugen.MainMenu);
-    game.state.add('Game', Knugen.Game);
+    game.state.add('Boot', KnugenGame.Boot);
+    game.state.add('Preloader', KnugenGame.Preloader);
+    game.state.add('MainMenu', KnugenGame.MainMenu);
+    game.state.add('Game', KnugenGame.Game);
     game.state.start('Boot');
 })();
 </script>

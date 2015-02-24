@@ -1,13 +1,13 @@
-Knugen.Preloader = function(game){
-	Knugen.WIDTH = 240;
-	Knugen.HEIGHT = 400;
+KnugenGame.Preloader = function(game){
+	KnugenGame.WIDTH = 240;
+	KnugenGame.HEIGHT = 400;
 };
-Knugen.Preloader.prototype = {
+KnugenGame.Preloader.prototype = {
 	preload: function(){
 		// set background color and preload image
 		this.stage.backgroundColor = '#FFFFFF';
-		this.preloadBar = this.add.sprite((Knugen.WIDTH-311)/2,
-										  								(Knugen.HEIGHT-27)/2,
+		this.preloadBar = this.add.sprite((KnugenGame.WIDTH-311)/2,
+										  								(KnugenGame.HEIGHT-27)/2,
 																			'preloaderBar');
 		this.load.setPreloadSprite(this.preloadBar);
 
@@ -21,6 +21,7 @@ Knugen.Preloader.prototype = {
 		this.load.image('kungen90', 'assets/Tmp_knugen_90.png');
 		this.load.image('kungen180', 'assets/Tmp_knugen_180.png');
 		this.load.image('kungen270', 'assets/Tmp_knugen_270.png');
+		this.load.image('frog', 'assets/Frog.png');
 
 		// load spritesheets
 		//this.load.spritesheet('button-start', 'assets/button-start.png', 200, 100);
