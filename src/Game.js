@@ -20,8 +20,15 @@ Knugen.Game.prototype = {
 
 		this.knugen = new Kungen(this.game);
 		this.game.add.existing(this.knugen);
+
+		this.crowns = new Crowns(this.game, this.knugen, 30, 0);
 	},
 	update: function(){
 		this.game.physics.arcade.collide(this.knugen, this.castle);
+		this.game.physics.arcade.overlap(this.knugen, this.crowns, collectCrown, null, this);
 	}
 };
+
+function collectCrown(theKnug, crown) {
+	crown.kill();
+}
