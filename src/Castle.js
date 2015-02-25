@@ -2,6 +2,8 @@ Castle = function(game) {
 
    this.game = game;
 
+   this.centerFloor = { x: this.game.width/2, y: 100 };
+
    Phaser.Group.call(this, game);
    this.physicsBodyType = Phaser.Physics.ARCADE;
    this.enableBody = true;
@@ -9,13 +11,12 @@ Castle = function(game) {
    var dholm = this.create(0, 0, 'castle');
    dholm.body.immovable = true;
 
-   this.leftGate = this.create(this.game.width/2-20, 80, 'left_gate');
-   this.leftGate.anchor.setTo(0.0, 0.5);
+   this.leftGate = this.create(this.centerFloor.x-20, this.centerFloor.y, 'left_gate');
+   this.leftGate.anchor.setTo(0.0, 1.0);
    this.leftGate.body.immovable = true;
 
-
-   this.rightGate = this.create(this.game.width/2+20, 80, 'right_gate');
-   this.rightGate.anchor.setTo(1.0, 0.5);
+   this.rightGate = this.create(this.centerFloor.x+20, this.centerFloor.y, 'right_gate');
+   this.rightGate.anchor.setTo(1.0, 1.0);
    this.rightGate.body.immovable = true;
 }
 
