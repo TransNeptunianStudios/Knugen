@@ -2,6 +2,8 @@ Knugen = function(game) {
 
    Phaser.Sprite.call(this, game, game.world.width/2, game.world.height/2, 'kungen0');
 
+   game.add.existing(this);
+
    game.physics.arcade.enable(this);
 
    this.inputEnabled = true;

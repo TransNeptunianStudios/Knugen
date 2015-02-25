@@ -15,7 +15,8 @@ KnugenGame.Preloader.prototype = {
 		this.load.image('menuBackground', 'assets/Menu_background.png');
 		this.load.image('background', 'assets/Background.png');
 		this.load.image('castle', 'assets/Castle.png');
-		this.load.image('gate', 'assets/Gate.png');
+		this.load.image('left_gate', 'assets/LeftGate.png');
+		this.load.image('right_gate', 'assets/RightGate.png');
 		this.load.image('crown', 'assets/Crown.png');
 		this.load.image('kungen0', 'assets/Tmp_knugen_0.png');
 		this.load.image('kungen90', 'assets/Tmp_knugen_90.png');
