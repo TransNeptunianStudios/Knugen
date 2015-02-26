@@ -13,6 +13,7 @@
     <script src="src/Frog.js"></script>
     <script src="src/Crowns.js"></script>
     <script src="src/Game.js"></script>
+    <script src="src/GameOver.js"></script>
 </head>
 <body>
 <script>
@@ -21,6 +22,7 @@
     game.state.add('Boot', KnugenGame.Boot);
     game.state.add('Preloader', KnugenGame.Preloader);
     game.state.add('MainMenu', KnugenGame.MainMenu);
+    game.state.add('GameOver', KnugenGame.GameOver);
     game.state.add('Game', KnugenGame.Game);
     game.state.start('Boot');
 })();

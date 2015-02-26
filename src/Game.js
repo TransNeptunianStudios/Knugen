@@ -32,10 +32,10 @@ KnugenGame.Game.prototype = {
 	},
 
 	releaseFrog: function() {
-		
+
 		// Open the gate
 		this.castle.openGate();
-		
+
 		// Spawn a frog
 		this.frogs.add(new Frog(this.game, this.castle.centerFloor, this.knugen));
 
@@ -49,5 +49,6 @@ KnugenGame.Game.prototype = {
 
 	killKnugen: function(theKnug, frog) {
 		theKnug.kill();
+		this.state.start('GameOver');
 	}
 };
