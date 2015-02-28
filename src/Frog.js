@@ -51,7 +51,8 @@ Frog.prototype.setIdle = function(){
    this.frame = 0;
 
    // setup next jump
-   this.game.time.events.add(1000, this.jump, this);
+   var nextJump = this.game.rnd.integerInRange(500, 2000);
+   this.game.time.events.add(nextJump, this.jump, this);
 }
 
 Frog.prototype.setAnimation = function(deg) {
