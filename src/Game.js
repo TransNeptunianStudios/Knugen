@@ -4,6 +4,7 @@ KnugenGame.Game = function(game){
 
 KnugenGame.Game.prototype = {
 	create: function(){
+
 		// Add physics
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 		this.game.physics.arcade.setBounds(0, 0, this.game.width, this.game.height);
@@ -28,10 +29,14 @@ KnugenGame.Game.prototype = {
 		this.depthSortGroup.add(this.knugen);
 
 		// Create Crowns
-		this.crowns = new Crowns(this.game, this.knugen, 30, 0);
+		this.crowns = new Crowns(this.game, this.garden, this.castle, this.knugen, 30, 0);
 
 		this.frogs = this.game.add.group();
 		this.depthSortGroup.add(this.frogs);
+
+		this.game.points = 0;
+		var style = { font: "14px Arial", fill: "#000000", align: "center" };
+		this.pointsText = this.game.add.text(5, 5, 'Kronor: ' + this.game.points, style);
 
 		this.game.time.events.loop(Phaser.Timer.SECOND*5, this.releaseFrog, this);
 	},
@@ -59,7 +64,10 @@ KnugenGame.Game.prototype = {
 	},
 
 	collectCrown: function(theKnug, crown) {
+		this.game.points++;
+		this.pointsText.setText('Kronor: ' + this.game.points);
 		crown.kill();
+		this.crowns.scheduleNewCrown();
 	},
 
 	killKnugen: function(theKnug, frog) {

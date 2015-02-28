@@ -9,10 +9,11 @@ KnugenGame.GameOver.prototype = {
       var totalGrodor = grodor.length;
       var groda = this.game.rnd.pick(grodor);
 
-      this.add.text(30, 30, "Groda " + groda.nr + " / " + totalGrodor + ": ",{ font: "20px Arial"});
-      this.add.text(30, 50, "\"" + groda.quote + "\"",{ font: "15px Arial"});
-      this.add.text(30, 80, groda.comment,{ font: "10px Arial"});
-      this.add.text(30, 95, groda.year,{ font: "10px Arial"});
+      this.add.text(30, 30, "Kronor: " + this.game.points, { font: "20px Arial"});
+      this.add.text(30, 50, "Groda " + groda.nr + " / " + totalGrodor + ": ",{ font: "20px Arial"});
+      this.add.text(30, 70, "\"" + groda.quote + "\"",{ font: "15px Arial"});
+      this.add.text(30, 100, groda.comment,{ font: "10px Arial"});
+      this.add.text(30, 115, groda.year,{ font: "10px Arial"});
 
       this.game.input.onDown.add(this.restartGame, this);
       },
