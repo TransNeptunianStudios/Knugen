@@ -37,7 +37,7 @@ KnugenGame.Game.prototype = {
 	},
 
 	update: function(){
-		this.depthSortGroup.sort('y', Phaser.Group.SORT_ASCENDING);
+		this.depthSortGroup.sort('y', Phaser.Group.SORT_DECENDING);
 
 		this.game.physics.arcade.collide(this.knugen,this.garden);
 		this.game.physics.arcade.collide(this.knugen, this.castle);
@@ -48,7 +48,6 @@ KnugenGame.Game.prototype = {
 	},
 
 	releaseFrog: function() {
-
 		// Open the gate
 		this.castle.openGate();
 
@@ -56,7 +55,7 @@ KnugenGame.Game.prototype = {
 		this.frogs.add(new Frog(this.game, this.castle.centerFloor, this.knugen));
 
 		// close gate
-		this.game.time.events.add(Phaser.Timer.SECOND*3, this.castle.closeGate, this.castle);
+		this.game.time.events.add(Phaser.Timer.SECOND*1.5, this.castle.closeGate, this.castle);
 	},
 
 	collectCrown: function(theKnug, crown) {
