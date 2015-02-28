@@ -1,7 +1,7 @@
 Frog = function(game, pos, knugen) {
    this.game = game;
    this.knugen = knugen;
-   this.speed = 20;
+   this.speed = 30;
 
    Phaser.Sprite.call(this, game, pos.x, pos.y-20, 'frog');
 
@@ -26,29 +26,32 @@ Frog.prototype = Object.create(Phaser.Sprite.prototype);
 Frog.prototype.constructor = Frog;
 
 Frog.prototype.update = function() {
+
 }
 
 Frog.prototype.jump = function() {
 
+   //var distToKnugen = this.game.physics.arcade.distanceToXY(this.knugen.x, this.knugen.y);
+
    var angleBetween = this.game.physics.arcade.angleBetween(this, this.knugen);
    this.setAnimation(Phaser.Math.radToDeg(angleBetween));
 
-   var distToKnugen = this.game.physics.arcade.distanceToXY(this.knugen.x, this.knugen.y);
-
    var normKnugVec = new Phaser.Point(this.knugen.x - this.x, this.knugen.y - this.y).normalize();
-   var targetX = this.x + normKnugVec.x * this.speed;
-   var targetY = this.y + normKnugVec.y * this.speed;
 
-   var jumpTween = this.game.add.tween(this).to({x: targetX, y: targetY}, 1000, Phaser.Easing.Linear.None, false, 600);
-   jumpTween.onComplete.add(this.setIdle, this);
-   jumpTween.start();
-   //this.game.add.tween(this.scale).to({x: 1.2, y: 1.2}, 600, Phaser.Easing.Quadratic.InOut, true, 500, 0, true);
-   this.game.time.events.add(3000, this.jump, this);
+   this.body.velocity.x = normKnugVec.x * this.speed;
+   this.body.velocity.y = normKnugVec.y * this.speed;
+   this.game.time.events.add(1000, this.setIdle, this);
 }
 
 Frog.prototype.setIdle = function(){
-  this.animations.stop();
-  this.frame = 0;
+   this.body.velocity.x = 0;
+   this.body.velocity.y = 0;
+
+   this.animations.stop();
+   this.frame = 0;
+
+   // setup next jump
+   this.game.time.events.add(1000, this.jump, this);
 }
 
 Frog.prototype.setAnimation = function(deg) {

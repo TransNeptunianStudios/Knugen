@@ -6,9 +6,10 @@ KnugenGame.Game.prototype = {
 	create: function(){
 		// Add physics
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
+		this.game.physics.arcade.setBounds(0, 0, this.game.width, this.game.height);
 
-		// display ground
-		var bg = this.add.sprite(0, 0, 'background');
+		// Create garden
+		this.garden = new Garden(this.game);
 
 		// Create Drottningholm
 		this.castle = new Castle(this.game);
@@ -26,9 +27,12 @@ KnugenGame.Game.prototype = {
 
 	update: function(){
 		this.frogs.sort('y', Phaser.Group.SORT_ASCENDING);
+		this.game.physics.arcade.collide(this.knugen,this.garden);
 		this.game.physics.arcade.collide(this.knugen, this.castle);
 		this.game.physics.arcade.overlap(this.knugen, this.crowns, this.collectCrown, null, this);
 		this.game.physics.arcade.overlap(this.knugen, this.frogs, this.killKnugen, null, this);
+
+		this.game.physics.arcade.collide(this.frogs,this.garden);
 	},
 
 	releaseFrog: function() {

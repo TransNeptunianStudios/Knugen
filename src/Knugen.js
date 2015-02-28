@@ -13,9 +13,12 @@ Knugen = function(game) {
    this.animations.add('west', [10, 11, 12], 10, true);
 
    this.inputEnabled = true;
-   this.anchor.setTo(0.5);
+   this.anchor.setTo(0, 1);
    this.body.collideWorldBound = true;
    this.body.allowRotation = false;
+
+   // Change Knug hitbox, only body, not head
+   this.body.height = 17;
 }
 
 Knugen.prototype = Object.create(Phaser.Sprite.prototype);
