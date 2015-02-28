@@ -20,6 +20,8 @@ KnugenGame.Preloader.prototype = {
 		this.load.image('right_gate', 'assets/RightGate.png');
 		this.load.image('crown', 'assets/Crown.png');
 		this.load.image('maze', 'assets/Maze.png');
+		this.load.image('fountainSmall', 'assets/Fountain_small.png');
+		this.load.image('fountainBig', 'assets/Fountain_big.png');
 
 		// load spritesheets
 		this.load.spritesheet('knugen', 'assets/Knugen.png', 16, 32);
@@ -27,7 +29,7 @@ KnugenGame.Preloader.prototype = {
 
 		// Load music
 		//  Firefox doesn't support mp3 files, so use ogg
-		//this.load.audio('bgMusic', 'assets/audio/bensound-jazzyfrenchy.ogg');
+		//this.load.audio('croak1', 'assets/audio/Croak1.ogg');
 	},
 	create: function(){
 		// start the MainMenu state
