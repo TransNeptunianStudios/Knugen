@@ -25,7 +25,7 @@ Knugen.prototype.update = function() {
    if (this.game.input.activePointer.isDown) {
       var radToPointer = this.game.physics.arcade.angleToPointer(this, this.game.input.activePointer);
       this.body.velocity = this.game.physics.arcade.velocityFromRotation(radToPointer, 60);
-      this.updateImage(Phaser.Math.radToDeg(radToPointer));
+      this.setAnimation(Phaser.Math.radToDeg(radToPointer));
    }
    else {
       this.body.velocity.x = 0;
@@ -36,7 +36,7 @@ Knugen.prototype.update = function() {
    }
 }
 
-Knugen.prototype.updateImage = function(deg) {
+Knugen.prototype.setAnimation = function(deg) {
 
    if (deg < -45.0 && deg > -135.0)
      this.animations.play('east');
