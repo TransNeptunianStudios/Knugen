@@ -24,11 +24,11 @@ Castle.prototype = Object.create(Phaser.Group.prototype);
 Castle.prototype.constructor = Castle;
 
 Castle.prototype.openGate = function() {
-   this.game.add.tween(this.leftGate.scale).to({x: 0.05}, 2000, Phaser.Easing.Quadratic.In, true);
-   this.game.add.tween(this.rightGate.scale).to({x: 0.05}, 2000, Phaser.Easing.Quadratic.In, true);
+   this.game.add.tween(this.leftGate.scale).to({x: 0.05}, 1000, Phaser.Easing.Quadratic.In, true);
+   this.game.add.tween(this.rightGate.scale).to({x: 0.05}, 1000, Phaser.Easing.Quadratic.In, true);
 }
 
 Castle.prototype.closeGate = function() {
-   this.game.add.tween(this.leftGate.scale).to({x: 1.0}, 2000, Phaser.Easing.Quadratic.In, true);
-   this.game.add.tween(this.rightGate.scale).to({x: 1.0}, 2000, Phaser.Easing.Quadratic.In, true);
+   this.game.add.tween(this.leftGate.scale).to({x: 1.0}, 1000, Phaser.Easing.Quadratic.In, true);
+   this.game.add.tween(this.rightGate.scale).to({x: 1.0}, 1000, Phaser.Easing.Quadratic.In, true);
 }

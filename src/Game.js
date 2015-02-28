@@ -8,11 +8,12 @@ KnugenGame.Game.prototype = {
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 		this.game.physics.arcade.setBounds(0, 0, this.game.width, this.game.height);
 
-
 		// display ground
 		this.game.add.sprite(0, 0, 'garden');
 
 		// Group with all that needs depth sorting
+		// Doesnt really work, because of weird anchors?
+		// http://www.html5gamedevs.com/topic/3995-is-it-possible-to-sort-nested-groups/
 		this.depthSortGroup = this.game.add.group();
 
 		// Create garden
@@ -32,7 +33,7 @@ KnugenGame.Game.prototype = {
 		this.frogs = this.game.add.group();
 		this.depthSortGroup.add(this.frogs);
 
-		this.game.time.events.loop(Phaser.Timer.SECOND*4, this.releaseFrog, this);
+		this.game.time.events.loop(Phaser.Timer.SECOND*5, this.releaseFrog, this);
 	},
 
 	update: function(){

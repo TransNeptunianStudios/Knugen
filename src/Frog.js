@@ -3,7 +3,7 @@ Frog = function(game, pos, knugen) {
    this.knugen = knugen;
    this.speed = 30;
 
-   Phaser.Sprite.call(this, game, pos.x, pos.y-20, 'frog');
+   Phaser.Sprite.call(this, game, pos.x, pos.y, 'frog');
 
    game.add.existing(this);
    game.physics.arcade.enable(this);
@@ -14,12 +14,10 @@ Frog = function(game, pos, knugen) {
    this.animations.add('south', [7, 8, 9], 10, true);
    this.animations.add('west', [10, 11, 12], 10, true);
 
-   this.anchor.setTo(0.5);
+   this.anchor.setTo(0.5, 1);
    this.body.collideWorldBound = true;
 
-   this.scale.setTo(0.0, 0.0);
-   var enteringTween = game.add.tween(this.scale).to({x: 1.0, y: 1.0}, 2000, Phaser.Easing.Linear.None, true, 1000);
-   enteringTween.onComplete.add(this.jump, this);
+   this.game.time.events.add(1000, this.jump, this);
 }
 
 Frog.prototype = Object.create(Phaser.Sprite.prototype);
