@@ -15,7 +15,8 @@ Frog = function(game, pos, knugen) {
    this.animations.add('west', [10, 11, 12], 10, true);
 
    this.anchor.setTo(0.5, 1);
-   this.body.collideWorldBound = true;
+   this.body.collideWorldBounds = true;
+   this.body.height = 11;
 
    this.game.time.events.add(1000, this.firstJump, this);
 }

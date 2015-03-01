@@ -3,18 +3,16 @@ Garden = function(game) {
    this.physicsBodyType = Phaser.Physics.ARCADE;
    this.enableBody = true;
 
+   var mid = game.world.width /3;
+
    // create all mazes
-   var maze1 = this.create(19, 258, 'maze');
+   var maze1 = this.create(mid-17, 265, 'maze');
+   maze1.anchor.setTo(0.5, 0);
    maze1.body.immovable = true;
 
-   var maze2 = this.create(19, 332, 'maze');
+   var maze2 = this.create(mid*2 + 17, 265, 'maze');
+   maze2.anchor.setTo(0.5, 0);
    maze2.body.immovable = true;
-
-   var maze3 = this.create(132, 258, 'maze');
-   maze3.body.immovable = true;
-
-   var maze3 = this.create(132, 332, 'maze');
-   maze3.body.immovable = true;
 
    // Create Fountains
    var big = this.create(120, 180, 'fountainBig');

@@ -40,6 +40,7 @@ KnugenGame.Game.prototype = {
 		this.game.physics.arcade.overlap(this.knugen, this.frogs, this.killKnugen, null, this);
 
 		this.game.physics.arcade.collide(this.frogs,this.garden);
+		this.game.physics.arcade.collide(this.frogs,this.castle);
 
 		// depth sorting
 		this.frogs.sort('y', Phaser.Group.SORT_DECENDING);
