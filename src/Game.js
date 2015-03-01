@@ -12,27 +12,19 @@ KnugenGame.Game.prototype = {
 		// display ground
 		this.game.add.sprite(0, 0, 'garden');
 
-		// Group with all that needs depth sorting
-		// Doesnt really work, because of weird anchors?
-		// http://www.html5gamedevs.com/topic/3995-is-it-possible-to-sort-nested-groups/
-		this.depthSortGroup = this.game.add.group();
-
 		// Create garden
 		this.garden = new Garden(this.game);
-		this.depthSortGroup.add(this.garden);
 
 		// Create Drottningholm
 		this.castle = new Castle(this.game);
 
 		// Create Knugen
 		this.knugen = new Knugen(this.game);
-		this.depthSortGroup.add(this.knugen);
 
 		// Create Crowns
 		this.crowns = new Crowns(this.game, this.garden, this.castle, this.knugen, 30, 0);
 
 		this.frogs = this.game.add.group();
-		this.depthSortGroup.add(this.frogs);
 
 		this.game.points = 0;
 		var style = { font: "14px Arial", fill: "#000000", align: "center" };
@@ -42,14 +34,16 @@ KnugenGame.Game.prototype = {
 	},
 
 	update: function(){
-		this.depthSortGroup.sort('y', Phaser.Group.SORT_DECENDING);
-
 		this.game.physics.arcade.collide(this.knugen,this.garden);
 		this.game.physics.arcade.collide(this.knugen, this.castle);
 		this.game.physics.arcade.overlap(this.knugen, this.crowns, this.collectCrown, null, this);
 		this.game.physics.arcade.overlap(this.knugen, this.frogs, this.killKnugen, null, this);
 
 		this.game.physics.arcade.collide(this.frogs,this.garden);
+
+		// depth sorting
+		this.frogs.sort('y', Phaser.Group.SORT_DECENDING);
+		// need to add some nested group orderings to the garden too.
 	},
 
 	releaseFrog: function() {

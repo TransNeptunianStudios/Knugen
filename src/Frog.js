@@ -17,7 +17,7 @@ Frog = function(game, pos, knugen) {
    this.anchor.setTo(0.5, 1);
    this.body.collideWorldBound = true;
 
-   this.game.time.events.add(1000, this.jump, this);
+   this.game.time.events.add(1000, this.firstJump, this);
 }
 
 Frog.prototype = Object.create(Phaser.Sprite.prototype);
@@ -25,6 +25,13 @@ Frog.prototype.constructor = Frog;
 
 Frog.prototype.update = function() {
 
+}
+
+Frog.prototype.firstJump = function() {
+   this.body.velocity.x = 0;
+   this.body.velocity.y = 1 * this.speed;
+
+   this.game.time.events.add(1000, this.setIdle, this);
 }
 
 Frog.prototype.jump = function() {
