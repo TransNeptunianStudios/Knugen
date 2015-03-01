@@ -11,5 +11,23 @@ var grodor =
         "quote": "Kära Örebroare",
         "comment": "Kungen besöker Arboga",
         "year" : "1985"
+    },
+    {
+        "nr": "3",
+        "quote": "Jag inviger härmed färjan som ska gå mellan... mellan... mellan hållplatserna!",
+        "comment": "Kungen inviger ny färjelinje",
+        "year" : "1985"
+    },
+    {
+        "nr": "4",
+        "quote": "Tack och lov kommer inte alla till Sverige, utan de försvinner sedan i Europa till olika platser.",
+        "comment": "Kungen på besök på migrationsverket",
+        "year" : "2015"
+    },
+    {
+        "nr": "5",
+        "quote": "Brunei är mer öppet än något annat land",
+        "comment": "Knugen hyllar diktaturen Brunei efter sitt statsbesök i landet.",
+        "year" : "2004"
     }
 ];
