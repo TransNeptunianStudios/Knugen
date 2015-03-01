@@ -29,15 +29,21 @@ Frog.prototype.update = function() {
 
 Frog.prototype.jump = function() {
 
-   //var distToKnugen = this.game.physics.arcade.distanceToXY(this.knugen.x, this.knugen.y);
+   var distToKnugen = this.game.physics.arcade.distanceToXY(this.knugen.x, this.knugen.y);
 
-   var angleBetween = this.game.physics.arcade.angleBetween(this, this.knugen);
-   this.setAnimation(Phaser.Math.radToDeg(angleBetween));
+   if(Phaser.Math.chanceRoll()){
+      var angleBetween = this.game.physics.arcade.angleBetween(this, this.knugen);
+      this.setAnimation(Phaser.Math.radToDeg(angleBetween));
 
-   var normKnugVec = new Phaser.Point(this.knugen.x - this.x, this.knugen.y - this.y).normalize();
+      var normKnugVec = new Phaser.Point(this.knugen.x - this.x, this.knugen.y - this.y).normalize();
 
-   this.body.velocity.x = normKnugVec.x * this.speed;
-   this.body.velocity.y = normKnugVec.y * this.speed;
+      this.body.velocity.x = normKnugVec.x * this.speed;
+      this.body.velocity.y = normKnugVec.y * this.speed;
+   }else{
+      var angle = Phaser.Math.degToRad(this.game.rnd.angle());
+      this.body.velocity.x = Math.cos(angle) * this.speed;
+      this.body.velocity.y = Math.sin(angle) * this.speed;
+   }
    this.game.time.events.add(1000, this.setIdle, this);
 }
 
