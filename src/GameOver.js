@@ -16,18 +16,18 @@ KnugenGame.GameOver.prototype = {
       comment.wordWrap = true;
       comment.wordWrapWidth = 190;
 
-      var graphics = this.game.add.graphics( 0, 0 );
+      var graphics = this.game.add.graphics( 0, 0);
       var quote = this.add.text(30, 85, "\"" + groda.quote + "\"",{ font: "15px Arial"});
       quote.wordWrap = true;
       quote.wordWrapWidth = 180;
 
       // draw a speach bubble
       graphics.beginFill(0xFFFFFF, 1);
-      graphics.drawRoundedRect(20, 65, 200, 30 + quote.height, 10);
+      graphics.drawRoundedRect(20, 70, 200, 20 + quote.height, 10);
 
-      graphics.moveTo(50,quote.height + 95);
-      graphics.lineTo(90, quote.height + 95);
-      graphics.lineTo(130, quote.height + 155);
+      graphics.moveTo(50,quote.height + 90);
+      graphics.lineTo(90, quote.height + 90);
+      graphics.lineTo(135, 245);
       graphics.endFill();
 
       this.add.text(30, 300, "Kronor: " + this.game.points, { font: "20px Arial"});

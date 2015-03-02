@@ -29,5 +29,47 @@ var grodor =
         "quote": "Brunei är mer öppet än något annat land",
         "comment": "Knugen hyllar diktaturen Brunei efter sitt statsbesök i landet.",
         "year" : "2004"
-    }
+    },
+    {
+        "nr": "6",
+        "quote": "Det är bara att räkna på, om de är två nu, då blir de sju nästa år, och sen blir det bara... om de hittar sina partners någonstans i skogen så exploderar det",
+        "comment": "Knugen uttalar sig om vargar under en älgjakt i Dalarna",
+        "year" : "Oktober 2008"
+    },
+    {
+        "nr": "7",
+        "quote": "Ämnet för dagen är brännskador",
+        "comment": "Knugen inleder en läkarkonferens om stelkramp i Ronneby",
+        "year" : "2008"
+    },
+    {
+        "nr": "8",
+        "quote": "Jag gillar inte att inviga kärnkraftverk, men gör det om jag får order.",
+        "comment": "Knugen mitt under kärnkraftsdebatten",
+        "year" : "1978"
+    },
+    {
+        "nr": "9",
+        "quote": "Om inte Gro Harlem Brundtland kan ta hand om sälproblemen, så undrar jag, hur ska hon då kunna ta hand om det norska folket?",
+        "comment": "Knugen kommenterar Norges säljakt.",
+        "year" : "1989"
+    },
+    {
+        "nr": "10",
+        "quote": "Ärade rektor vid Uppsala universitet.",
+        "comment": "Tal till rektor för Lunds universitet",
+        "year" : "1995"
+    },
+    {
+        "nr": "11",
+        "quote": "Nu vänder vi blad och går vidare",
+        "comment": "Om nya bokens skandaler(Ska man ens ha med denna?)",
+        "year" : "2010"
+    },
+    {
+        "nr": "12",
+        "quote": "Vilken bok...? Det finns så många böcker... Det finns en väldigt berömd i det här landet också. Den ska vi inte heller prata om, säger kungen.",
+        "comment": "Kungen i kina om skandalboken",
+        "year" : "2010"
+    },
 ];
