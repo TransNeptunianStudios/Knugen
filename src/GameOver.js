@@ -4,8 +4,7 @@ KnugenGame.GameOver = function(game){
 KnugenGame.GameOver.prototype = {
    create: function(){
       var background = this.add.sprite(0, 0, 'gameOverScreen');
-      var bubble = this.add.sprite(20, 80, 'bubble');
-      
+
       // defined in grodor.json
       var totalGrodor = grodor.length;
       var groda = this.game.rnd.pick(grodor);
@@ -17,11 +16,21 @@ KnugenGame.GameOver.prototype = {
       comment.wordWrap = true;
       comment.wordWrapWidth = 190;
 
+      var graphics = this.game.add.graphics( 0, 0 );
       var quote = this.add.text(30, 85, "\"" + groda.quote + "\"",{ font: "15px Arial"});
       quote.wordWrap = true;
-      quote.wordWrapWidth = 190;
+      quote.wordWrapWidth = 180;
 
-      this.add.text(30, 220, "Kronor: " + this.game.points, { font: "20px Arial"});
+      // draw a speach bubble
+      graphics.beginFill(0xFFFFFF, 1);
+      graphics.drawRoundedRect(20, 65, 200, 30 + quote.height, 10);
+
+      graphics.moveTo(50,quote.height + 95);
+      graphics.lineTo(90, quote.height + 95);
+      graphics.lineTo(130, quote.height + 155);
+      graphics.endFill();
+
+      this.add.text(30, 300, "Kronor: " + this.game.points, { font: "20px Arial"});
 
       this.game.input.onDown.add(this.restartGame, this);
       },
