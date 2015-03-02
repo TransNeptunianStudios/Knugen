@@ -7,6 +7,7 @@
     <script src="src/phaser.js"></script><!--change for release -->
     <script src="src/Boot.js"></script>
     <script src="src/Preloader.js"></script>
+    <script src="src/Splash.js"></script>
     <script src="src/MainMenu.js"></script>
     <script src="src/Castle.js"></script>
     <script src="src/Knugen.js"></script>
@@ -23,6 +24,7 @@
     var game = new Phaser.Game(240, 400, Phaser.CANVAS, 'Knugen');
     game.state.add('Boot', KnugenGame.Boot);
     game.state.add('Preloader', KnugenGame.Preloader);
+    game.state.add('Splash', KnugenGame.Splash);
     game.state.add('MainMenu', KnugenGame.MainMenu);
     game.state.add('GameOver', KnugenGame.GameOver);
     game.state.add('Game', KnugenGame.Game);

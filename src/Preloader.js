@@ -5,13 +5,15 @@ KnugenGame.Preloader = function(game){
 KnugenGame.Preloader.prototype = {
 	preload: function(){
 		// set background color and preload image
-		this.stage.backgroundColor = '#FFFFFF';
-		this.preloadBar = this.add.sprite((KnugenGame.WIDTH-311)/2,
-										  								(KnugenGame.HEIGHT-27)/2,
-																			'preloaderBar');
+		this.stage.backgroundColor = '#000000';
+		this.preloadBar = this.add.sprite( (KnugenGame.WIDTH-311)/2
+													, (KnugenGame.HEIGHT-27)/2
+													, 'preloaderBar');
+
 		this.load.setPreloadSprite(this.preloadBar);
 
 		// load images
+		this.load.image('TNSlogo', 'assets/TNS_logo.png');
 		this.load.image('menuBackground', 'assets/Menu_background.png');
 		this.load.image('gameOverScreen', 'assets/GameOverScreen.png');
 		this.load.image('garden', 'assets/Garden.png');
@@ -34,6 +36,6 @@ KnugenGame.Preloader.prototype = {
 	},
 	create: function(){
 		// start the MainMenu state
-		this.state.start('MainMenu');
+		this.state.start('Splash');
 	}
 };
