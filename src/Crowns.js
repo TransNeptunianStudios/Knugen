@@ -1,4 +1,4 @@
-Crowns = function(game, garden, castle, knugen) {
+Crowns = function(game, physicalGroup, knugen) {
    Phaser.Group.call(this, game);
    this.game = game;
    this.enableBody = true;
@@ -10,20 +10,19 @@ Crowns = function(game, garden, castle, knugen) {
       ra.push(new Phaser.Rectangle(child.x, child.y, child.width, child.height));
    };
 
-   garden.forEach(extractor, this, false, rectArray);
-   castle.forEach(extractor, this, false, rectArray);
+   physicalGroup.forEach(extractor, this, false, rectArray);
    extractor(knugen, rectArray);
 
    this.validPositions = [];
 
    for (var i = 0; i < game.width-this.crownSize; i++) {
       for (var j = 0; j < game.height-this.crownSize; j++) {
-         
+
          var tmp = new Phaser.Rectangle(i, j, this.crownSize, this.crownSize);
          var ok = true;
 
          for (var k = 0; k < rectArray.length; k++) {
-            if (Phaser.Rectangle.intersects(tmp, rectArray[k])) {               
+            if (Phaser.Rectangle.intersects(tmp, rectArray[k])) {
                ok = false;
                break;
             }

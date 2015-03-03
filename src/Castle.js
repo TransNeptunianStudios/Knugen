@@ -1,4 +1,4 @@
-Castle = function(game) {
+Castle = function(game, PhysicsGroup) {
 
    this.game = game;
 
@@ -8,14 +8,14 @@ Castle = function(game) {
    this.physicsBodyType = Phaser.Physics.ARCADE;
    this.enableBody = true;
 
-   var dholm = this.create(0, 0, 'castle');
+   var dholm = PhysicsGroup.create(0, 0, 'castle');
    dholm.body.immovable = true;
 
-   this.leftGate = this.create(this.centerFloor.x-20, this.centerFloor.y, 'left_gate');
+   this.leftGate = PhysicsGroup.create(this.centerFloor.x-20, this.centerFloor.y, 'left_gate');
    this.leftGate.anchor.setTo(0.0, 1.0);
    this.leftGate.body.immovable = true;
 
-   this.rightGate = this.create(this.centerFloor.x+20, this.centerFloor.y, 'right_gate');
+   this.rightGate = PhysicsGroup.create(this.centerFloor.x+20, this.centerFloor.y, 'right_gate');
    this.rightGate.anchor.setTo(1.0, 1.0);
    this.rightGate.body.immovable = true;
 }

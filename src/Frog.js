@@ -2,8 +2,9 @@ Frog = function(game, pos, knugen) {
    this.game = game;
    this.knugen = knugen;
    this.speed = 30;
+   this.frog = true;
 
-   Phaser.Sprite.call(this, game, pos.x, pos.y, 'frog');
+   Phaser.Sprite.call(this, game, pos.x, pos.y-1, 'frog');
 
    game.add.existing(this);
    game.physics.arcade.enable(this);

@@ -12,19 +12,22 @@ KnugenGame.Game.prototype = {
 		// display ground
 		this.game.add.sprite(0, 0, 'garden');
 
+		this.physicalGroup = this.game.add.group();
+		this.physicalGroup.physicsBodyType = Phaser.Physics.ARCADE;
+		this.physicalGroup.enableBody = true;
+
 		// Create garden
-		this.garden = new Garden(this.game);
+		this.garden = new Garden(this.game, this.physicalGroup);
 
 		// Create Drottningholm
-		this.castle = new Castle(this.game);
+		this.castle = new Castle(this.game, this.physicalGroup);
 
 		// Create Knugen
 		this.knugen = new Knugen(this.game);
+		this.physicalGroup.add(this.knugen);
 
 		// Create Crowns
-		this.crowns = new Crowns(this.game, this.garden, this.castle, this.knugen, 30, 0);
-
-		this.frogs = this.game.add.group();
+		this.crowns = new Crowns(this.game, this.physicalGroup, this.knugen, 30, 0);
 
 		this.game.points = 0;
 		var style = { font: "14px Arial", fill: "#000000", align: "center" };
@@ -34,16 +37,14 @@ KnugenGame.Game.prototype = {
 	},
 
 	update: function(){
-		this.game.physics.arcade.collide(this.knugen,this.garden);
-		this.game.physics.arcade.collide(this.knugen, this.castle);
 		this.game.physics.arcade.overlap(this.knugen, this.crowns, this.collectCrown, null, this);
-		this.game.physics.arcade.overlap(this.knugen, this.frogs, this.killKnugen, null, this);
+		this.game.physics.arcade.overlap(this.knugen, this.physicalGroup, this.killKnugen, null, this);
 
-		this.game.physics.arcade.collide(this.frogs,this.garden);
-		this.game.physics.arcade.collide(this.frogs,this.castle);
+		this.game.physics.arcade.collide(this.physicalGroup, this.castle);
+		this.game.physics.arcade.collide(this.physicalGroup,this.physicalGroup);
 
 		// depth sorting
-		this.frogs.sort('y', Phaser.Group.SORT_DECENDING);
+		this.physicalGroup .sort('y', Phaser.Group.SORT_DECENDING);
 		// need to add some nested group orderings to the garden too.
 	},
 
@@ -52,7 +53,7 @@ KnugenGame.Game.prototype = {
 		this.castle.openGate();
 
 		// Spawn a frog
-		this.frogs.add(new Frog(this.game, this.castle.centerFloor, this.knugen));
+		this.physicalGroup.add(new Frog(this.game, this.castle.centerFloor, this.knugen));
 
 		// close gate
 		this.game.time.events.add(Phaser.Timer.SECOND*1.5, this.castle.closeGate, this.castle);
@@ -65,8 +66,11 @@ KnugenGame.Game.prototype = {
 		this.crowns.scheduleNewCrown();
 	},
 
-	killKnugen: function(theKnug, frog) {
-		theKnug.kill();
-		this.state.start('GameOver');
+	killKnugen: function(theKnug, stuff) {
+		if(stuff.frog){
+			theKnug.kill();
+			this.state.start('GameOver');
+		}
+
 	}
 };
