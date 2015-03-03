@@ -3,6 +3,7 @@ Frog = function(game, pos, knugen) {
    this.knugen = knugen;
    this.speed = 30;
    this.frog = true;
+   this.croakSound = this.game.add.audio('croak', 0.9, false);
 
    Phaser.Sprite.call(this, game, pos.x, pos.y-1, 'frog');
 
@@ -33,6 +34,7 @@ Frog.prototype.firstJump = function() {
    this.body.velocity.x = 0;
    this.body.velocity.y = 1 * this.speed;
 
+   this.croak();
    this.game.time.events.add(1000, this.setIdle, this);
 }
 
@@ -53,6 +55,7 @@ Frog.prototype.jump = function() {
       this.body.velocity.x = Math.cos(angle) * this.speed;
       this.body.velocity.y = Math.sin(angle) * this.speed;
    }
+   this.croak();
    this.game.time.events.add(1000, this.setIdle, this);
 }
 
@@ -78,4 +81,9 @@ Frog.prototype.setAnimation = function(deg) {
      this.animations.play('west');
    else
      this.animations.play('south');
+}
+
+Frog.prototype.croak = function() {
+   if(this.game.rnd.integerInRange(0, 5) > 4)
+      this.croakSound.play();
 }

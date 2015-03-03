@@ -12,7 +12,7 @@ KnugenGame.Splash.prototype = {
 
       this.game.input.onDown.add(this.startGame, this);
 
-      var music = this.game.add.audio('bgMusic', 0.9, true);
+      var music = this.game.add.audio('bgMusic', 0.7, true);
       music.play();
    },
    startGame: function() {

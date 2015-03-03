@@ -32,6 +32,8 @@ KnugenGame.Preloader.prototype = {
 		// Load music
 		//  Firefox doesn't support mp3 files, so use ogg
 		this.load.audio('bgMusic', 'assets/audio/Minstrel_Guild.ogg');
+		this.load.audio('croak', 'assets/audio/13598_weldonsmith_frog1alien.ogg');
+
 	},
 	create: function(){
 		// start the MainMenu state
