@@ -8,9 +8,9 @@ Knugen = function(game) {
 
    // All animations, frame 0 is "idle"
    this.animations.add('north', [1, 2, 3], 10, true);
-   this.animations.add('east', [4, 5, 6], 10, true);
-   this.animations.add('south', [7, 8, 9], 10, true);
-   this.animations.add('west', [10, 11, 12], 10, true);
+   this.animations.add('east', [4, 5, 6, 7, 8, 9, 10, 11], 10, true);
+   this.animations.add('south', [12, 13, 14], 10, true);
+   this.animations.add('west', [15, 16, 17], 10, true);
 
    this.inputEnabled = true;
    this.anchor.setTo(0, 1);
