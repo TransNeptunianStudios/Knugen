@@ -11,6 +11,9 @@ KnugenGame.Splash.prototype = {
       fadeTween.start();
 
       this.game.input.onDown.add(this.startGame, this);
+
+      var music = this.game.add.audio('bgMusic', 0.9, true);
+      music.play();
    },
    startGame: function() {
       // start the Game state
