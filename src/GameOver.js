@@ -27,7 +27,7 @@ KnugenGame.GameOver.prototype = {
 
       graphics.moveTo(50,quote.height + 90);
       graphics.lineTo(90, quote.height + 90);
-      graphics.lineTo(135, 245);
+      graphics.lineTo(130, 265);
       graphics.endFill();
 
       this.add.text(30, 300, "Kronor: " + this.game.points, { font: "20px Arial"});
