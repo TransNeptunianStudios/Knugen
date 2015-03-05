@@ -46,7 +46,6 @@ KnugenGame.Game.prototype = {
 		// depth sorting
 		this.physicalGroup .sort('y', Phaser.Group.SORT_DECENDING);
 	},
-
 	releaseFrog: function() {
 		// Open the gate
 		this.castle.openGate();
