@@ -14,7 +14,7 @@ Knugen = function(game) {
    this.frame = 2;
 
    this.inputEnabled = true;
-   this.anchor.setTo(0, 1);
+   this.anchor.setTo(0.5, 0.9);
    this.body.collideWorldBounds = true;
 
    // Change Knug hitbox, only body, not head
