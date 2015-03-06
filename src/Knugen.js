@@ -1,5 +1,7 @@
 Knugen = function(game) {
 
+  this.knugen = true;
+
    Phaser.Sprite.call(this, game, game.world.width/2, game.world.height/2, 'knugen');
 
    game.add.existing(this);

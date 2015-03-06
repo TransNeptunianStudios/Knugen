@@ -1,8 +1,12 @@
-Frog = function(game, pos, knugen) {
+frogIdFactory = 0;
+
+Frog = function(game, pos, physicalGroup, knugen) {
    this.game = game;
    this.knugen = knugen;
    this.speed = 30;
    this.frog = true;
+   this.frodId = frogIdFactory++;
+   this.physicalGroup = physicalGroup;
 
    Phaser.Sprite.call(this, game, pos.x, pos.y-1, 'frog');
 
@@ -18,6 +22,19 @@ Frog = function(game, pos, knugen) {
    this.anchor.setTo(0.5, 1);
    this.body.collideWorldBounds = true;
    this.body.height = 11;
+
+   this.allLines = [];
+
+   this.physicalGroup.forEach(function(sprite) {
+      if (!sprite.frog && !sprite.knugen) {
+         this.allLines.push(new Phaser.Line(sprite.body.x, sprite.body.y, sprite.body.x + sprite.width, sprite.body.y));
+         this.allLines.push(new Phaser.Line(sprite.body.x, sprite.body.y, sprite.body.x, sprite.body.y + sprite.height));
+         this.allLines.push(new Phaser.Line(sprite.body.x + sprite.width, sprite.body.y, sprite.body.x + sprite.width, sprite.body.y + sprite.height));
+         this.allLines.push(new Phaser.Line(sprite.body.x, sprite.body.y + sprite.height, sprite.body.x + sprite.width, sprite.body.y + sprite.height));
+      }
+   }, this);
+
+   this.line = new Phaser.Line(0, 0, 0, 0);
 
    this.game.time.events.add(1000, this.firstJump, this);
 }
@@ -40,19 +57,41 @@ Frog.prototype.jump = function() {
 
    var distToKnugen = this.game.physics.arcade.distanceToXY(this.knugen.x, this.knugen.y);
 
-   if(Phaser.Math.chanceRoll()){
-      var angleBetween = this.game.physics.arcade.angleBetween(this, this.knugen);
-      this.setAnimation(Phaser.Math.radToDeg(angleBetween));
+   var angle = this.game.physics.arcade.angleBetween(this, this.knugen);
 
-      var normKnugVec = new Phaser.Point(this.knugen.x - this.x, this.knugen.y - this.y).normalize();
+   this.line.fromAngle(this.world.x, this.world.y, angle, this.speed);
 
-      this.body.velocity.x = normKnugVec.x * this.speed;
-      this.body.velocity.y = normKnugVec.y * this.speed;
-   }else{
-      var angle = Phaser.Math.degToRad(this.game.rnd.angle());
-      this.body.velocity.x = Math.cos(angle) * this.speed;
-      this.body.velocity.y = Math.sin(angle) * this.speed;
+   var degStep = 1;
+   var rotStart = 0;
+   var changeDir = false;
+
+   if (Phaser.Math.chanceRoll()) {
+      rotStart = 1;
    }
+   else {
+      rotStart = -1;
+   }
+
+   var totalAddedDeg = 0;
+
+   while (this.checkIntersection(this.line) && totalAddedDeg < (2*Math.PI)) {
+      if (changeDir) {
+         changeDir = false;
+         rotStart *= -1;
+      }
+      else {
+         totalAddedDeg += Phaser.Math.degToRad(degStep);
+      }
+
+      this.line.fromAngle(this.world.x, this.world.y, angle + (rotStart * totalAddedDeg), this.speed);
+   }
+
+   angle += totalAddedDeg;
+
+   this.body.velocity.x = Math.cos(angle) * this.speed;
+   this.body.velocity.y = Math.sin(angle) * this.speed;
+
+   this.setAnimation(Phaser.Math.radToDeg(angle));
    this.game.time.events.add(1000, this.setIdle, this);
 }
 
@@ -78,4 +117,15 @@ Frog.prototype.setAnimation = function(deg) {
      this.animations.play('west');
    else
      this.animations.play('south');
+}
+
+Frog.prototype.checkIntersection = function(ray) {
+
+   for (var i = 0, len = this.allLines.length; i < len; i++) {
+      if (Phaser.Line.intersects(ray, this.allLines[i])) {
+         return true;
+      }
+   }
+
+   return false;
 }

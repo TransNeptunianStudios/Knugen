@@ -53,7 +53,7 @@ KnugenGame.Game.prototype = {
 		this.castle.openGate();
 
 		// Spawn a frog
-		this.physicalGroup.add(new Frog(this.game, this.castle.centerFloor, this.knugen));
+		this.physicalGroup.add(new Frog(this.game, this.castle.centerFloor, this.physicalGroup, this.knugen));
 
 		// close gate
 		this.game.time.events.add(Phaser.Timer.SECOND*1.5, this.castle.closeGate, this.castle);
