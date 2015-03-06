@@ -14,7 +14,7 @@ KnugenGame.Preloader.prototype = {
 
 		// load images
 		this.load.image('TNSlogo', 'assets/TNS_logo.png');
-		this.load.image('menuBackground', 'assets/Menu_background.png');
+		this.load.image('menuBackground', 'assets/Menu.png');
 		this.load.image('gameOverScreen', 'assets/GameOverScreen.png');
 		this.load.image('garden', 'assets/Garden.png');
 		this.load.image('castle', 'assets/Castle.png');
@@ -22,16 +22,18 @@ KnugenGame.Preloader.prototype = {
 		this.load.image('right_gate', 'assets/RightGate.png');
 		this.load.image('crown', 'assets/Crown.png');
 		this.load.image('maze', 'assets/Maze.png');
-		this.load.image('fountainSmall', 'assets/Fountain_small.png');
-		this.load.image('fountainBig', 'assets/Fountain_big.png');
+		this.load.image('fountainSmall', 'assets/Small fountain.png');
+		this.load.image('fountainBig', 'assets/Hero fountain.png');
 
 		// load spritesheets
-		this.load.spritesheet('knugen', 'assets/Knugen.png', 16, 32);
-		this.load.spritesheet('frog', 'assets/Frog.png', 16, 16);
+		this.load.spritesheet('knugen', 'assets/Knugen.png', 19, 32);
+		this.load.spritesheet('frog', 'assets/Frog.png', 15, 14);
 
 		// Load music
 		//  Firefox doesn't support mp3 files, so use ogg
-		//this.load.audio('croak1', 'assets/audio/Croak1.ogg');
+		this.load.audio('bgMusic', 'assets/audio/Minstrel_Guild.ogg');
+		this.load.audio('croak', 'assets/audio/13598_weldonsmith_frog1alien.ogg');
+
 	},
 	create: function(){
 		// start the MainMenu state

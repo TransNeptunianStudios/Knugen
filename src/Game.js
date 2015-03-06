@@ -45,9 +45,7 @@ KnugenGame.Game.prototype = {
 
 		// depth sorting
 		this.physicalGroup .sort('y', Phaser.Group.SORT_DECENDING);
-		// need to add some nested group orderings to the garden too.
 	},
-
 	releaseFrog: function() {
 		// Open the gate
 		this.castle.openGate();
