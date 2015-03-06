@@ -7,7 +7,10 @@ Crowns = function(game, physicalGroup, knugen) {
    var rectArray = [];
 
    var extractor = function(child, ra) {
-      ra.push(new Phaser.Rectangle(child.x, child.y, child.width, child.height));
+      ra.push(new Phaser.Rectangle(child.x - child.anchor.x * child.width,
+                                   child.y - child.anchor.y * child.height,
+                                   child.width,
+                                   child.height));
    };
 
    physicalGroup.forEach(extractor, this, false, rectArray);
