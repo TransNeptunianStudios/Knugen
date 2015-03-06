@@ -24,6 +24,7 @@ KnugenGame.Preloader.prototype = {
 		this.load.image('maze', 'assets/Maze.png');
 		this.load.image('fountainSmall', 'assets/Small fountain.png');
 		this.load.image('fountainBig', 'assets/Hero fountain.png');
+		this.load.image('KnugGroda', 'assets/Grodknugen.png');
 
 		// load spritesheets
 		this.load.spritesheet('knugen', 'assets/Knugen.png', 19, 32);

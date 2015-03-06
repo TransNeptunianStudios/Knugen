@@ -4,6 +4,7 @@ KnugenGame.GameOver = function(game){
 KnugenGame.GameOver.prototype = {
    create: function(){
       var background = this.add.sprite(0, 0, 'gameOverScreen');
+      var background = this.add.sprite(100, 270, 'KnugGroda');
 
       // defined in grodor.json
       var totalGrodor = grodor.length;
@@ -40,7 +41,7 @@ KnugenGame.GameOver.prototype = {
       graphics.endFill();
 
       // Will be changed to some highscore list
-      this.add.text(30, 300, "Kronor: " + this.game.points, { font: "20px Arial"});
+      this.add.text(10, 350, "Kronor: " + this.game.points, { font: "10px Arial"});
 
       this.game.input.onDown.add(this.restartGame, this);
       },
