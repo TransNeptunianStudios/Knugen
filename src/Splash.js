@@ -7,9 +7,6 @@ KnugenGame.Splash.prototype = {
       logo.anchor.setTo(0.5);
       logo.scale.setTo(0.6);
 
-
-      this.game.input.onDown.add(this.startGame, this);
-
       var music = this.game.add.audio('bgMusic', 0.7, true);
       music.play();
 
@@ -23,6 +20,8 @@ KnugenGame.Splash.prototype = {
       var creditFade = this.game.add.tween(credits).to({alpha: 0}, 1000, Phaser.Easing.Linear.None, false, 3000);
       creditFade.onComplete.add(this.startGame, this);
       creditFade.start();
+
+      this.game.input.onDown.add(this.startGame, this);
    },
    startGame: function() {
       // start the Game state
