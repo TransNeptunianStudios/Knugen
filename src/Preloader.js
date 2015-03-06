@@ -17,6 +17,7 @@ KnugenGame.Preloader.prototype = {
 		this.load.image('menuBackground', 'assets/Menu.png');
 		this.load.image('gameOverScreen', 'assets/GameOverScreen.png');
 		this.load.image('garden', 'assets/Garden.png');
+		this.load.image('clouds', 'assets/Clouds.png');
 		this.load.image('castle', 'assets/Castle.png');
 		this.load.image('left_gate', 'assets/LeftGate.png');
 		this.load.image('right_gate', 'assets/RightGate.png');

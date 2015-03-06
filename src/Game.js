@@ -18,6 +18,7 @@ KnugenGame.Game.prototype = {
 
 		// Create garden
 		this.garden = new Garden(this.game, this.physicalGroup);
+		this.clouds = this.add.tileSprite(0, 0, this.game.width, 23, 'clouds');
 
 		// Create Drottningholm
 		this.castle = new Castle(this.game, this.physicalGroup);
@@ -37,6 +38,9 @@ KnugenGame.Game.prototype = {
 	},
 
 	update: function(){
+		// move clouds
+		this.clouds.tilePosition.x -= 0.1;
+
 		this.game.physics.arcade.overlap(this.knugen, this.crowns, this.collectCrown, null, this);
 		this.game.physics.arcade.overlap(this.knugen, this.physicalGroup, this.killKnugen, null, this);
 
