@@ -25,10 +25,25 @@ Frog = function(game, pos, physicalGroup, knugen) {
 
    this.physicalGroup.forEach(function(sprite) {
       if (!sprite.frog && !sprite.knugen) {
-         this.allLines.push(new Phaser.Line(sprite.body.x, sprite.body.y, sprite.body.x + sprite.width, sprite.body.y));
-         this.allLines.push(new Phaser.Line(sprite.body.x, sprite.body.y, sprite.body.x, sprite.body.y + sprite.height));
-         this.allLines.push(new Phaser.Line(sprite.body.x + sprite.width, sprite.body.y, sprite.body.x + sprite.width, sprite.body.y + sprite.height));
-         this.allLines.push(new Phaser.Line(sprite.body.x, sprite.body.y + sprite.height, sprite.body.x + sprite.width, sprite.body.y + sprite.height));
+         var leftX = sprite.x - sprite.anchor.x * sprite.body.width;
+         var topY = sprite.y - sprite.anchor.y * sprite.body.height;
+
+         this.allLines.push(new Phaser.Line(leftX,
+                                            topY,
+                                            leftX + sprite.body.width, 
+                                            topY));
+         this.allLines.push(new Phaser.Line(leftX,
+                                            topY,
+                                            leftX,
+                                            topY + sprite.body.height));
+         this.allLines.push(new Phaser.Line(leftX + sprite.body.width,
+                                            topY, 
+                                            leftX + sprite.body.width,
+                                            topY + sprite.body.height));
+         this.allLines.push(new Phaser.Line(leftX,
+                                            topY + sprite.body.height,
+                                            leftX + sprite.body.width,
+                                            topY + sprite.body.height));
       }
    }, this);
 
@@ -52,7 +67,7 @@ Frog.prototype.firstJump = function() {
 }
 
 Frog.prototype.jump = function() {
-   
+
    var angle = this.game.physics.arcade.angleBetween(this, this.knugen);
    this.line.fromAngle(this.world.x, this.world.y, angle, this.speed);
 
