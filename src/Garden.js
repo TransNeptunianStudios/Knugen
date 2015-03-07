@@ -14,6 +14,8 @@ Garden = function(game, physicalGroup) {
 
    // Create Fountains
    var big = physicalGroup.create(120, 180, 'fountainBig');
+   big.animations.add('flow');
+   big.animations.play('flow', 10, true);
    big.anchor.setTo(0.5, 1);
    big.body.height = 30;
    big.body.immovable = true;
