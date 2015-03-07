@@ -30,14 +30,14 @@ Frog = function(game, pos, physicalGroup, knugen) {
 
          this.allLines.push(new Phaser.Line(leftX,
                                             topY,
-                                            leftX + sprite.body.width, 
+                                            leftX + sprite.body.width,
                                             topY));
          this.allLines.push(new Phaser.Line(leftX,
                                             topY,
                                             leftX,
                                             topY + sprite.body.height));
          this.allLines.push(new Phaser.Line(leftX + sprite.body.width,
-                                            topY, 
+                                            topY,
                                             leftX + sprite.body.width,
                                             topY + sprite.body.height));
          this.allLines.push(new Phaser.Line(leftX,
@@ -61,6 +61,7 @@ Frog.prototype.update = function() {
 Frog.prototype.firstJump = function() {
    this.body.velocity.x = 0;
    this.body.velocity.y = 1 * this.speed;
+   this.setAnimation(90);
 
    this.croak();
    this.game.time.events.add(1000, this.setIdle, this);
