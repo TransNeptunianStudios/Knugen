@@ -42,6 +42,7 @@ KnugenGame.Game.prototype = {
 		this.clouds.tilePosition.x -= 0.1;
 
 		this.game.physics.arcade.overlap(this.knugen, this.crowns, this.collectCrown, null, this);
+		this.game.physics.arcade.overlap(this.physicalGroup, this.crowns, this.collectCrown, null, this);
 		this.game.physics.arcade.overlap(this.knugen, this.physicalGroup, this.killKnugen, null, this);
 
 		this.game.physics.arcade.collide(this.physicalGroup, this.castle);
@@ -61,11 +62,14 @@ KnugenGame.Game.prototype = {
 		this.game.time.events.add(Phaser.Timer.SECOND*1.5, this.castle.closeGate, this.castle);
 	},
 
-	collectCrown: function(theKnug, crown) {
-		this.game.points++;
-		this.pointsText.setText('Kronor: ' + this.game.points);
+	collectCrown: function(collector, crown) {
 		crown.kill();
 		this.crowns.scheduleNewCrown();
+
+		if(collector.knugen){
+			this.game.points++;
+			this.pointsText.setText('Kronor: ' + this.game.points);
+		}
 	},
 
 	killKnugen: function(theKnug, stuff) {
