@@ -29,6 +29,7 @@ KnugenGame.Game.prototype = {
 
 		// Create Crowns
 		this.crowns = new Crowns(this.game, this.physicalGroup, this.knugen, 30, 0);
+		this.croakSound = this.game.add.audio('crown', 0.9, false);
 
 		this.game.points = 0;
 		var style = { font: "14px Arial", fill: "#000000", align: "center" };
@@ -67,6 +68,7 @@ KnugenGame.Game.prototype = {
 		this.crowns.scheduleNewCrown();
 
 		if(collector.knugen){
+			this.croakSound.play();
 			this.game.points++;
 			this.pointsText.setText('Kronor: ' + this.game.points);
 		}
