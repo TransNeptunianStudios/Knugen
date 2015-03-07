@@ -26,10 +26,10 @@ KnugenGame.Preloader.prototype = {
 		this.load.image('fountainSmall', 'assets/Small fountain.png');
 		this.load.image('fountainBig', 'assets/Hero fountain.png');
 		this.load.image('KnugGroda', 'assets/Grodknugen.png');
+		this.load.image('frog', 'assets/Frog.png');
 
 		// load spritesheets
 		this.load.spritesheet('knugen', 'assets/Knugen.png', 19, 32);
-		this.load.spritesheet('frog', 'assets/Frog.png', 15, 14);
 
 		// Load music
 		//  Firefox doesn't support mp3 files, so use ogg

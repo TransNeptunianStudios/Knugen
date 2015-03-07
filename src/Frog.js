@@ -6,7 +6,19 @@ Frog = function(game, pos, physicalGroup, knugen) {
    this.physicalGroup = physicalGroup;
    this.croakSound = this.game.add.audio('croak', 0.9, false);
 
-   Phaser.Sprite.call(this, game, pos.x, pos.y-1, 'frog');
+   bmd = game.make.bitmapData(128, 48);
+   bmd.load('frog');
+   // Color tone
+   var tonesList =[{r: 128, g: 255, b: 0},
+                  {r: 0, g: 128, b: 0},
+                  {r: 150, g: 150, b: 0},
+                  {r: 120, g: 150, b: 0},
+                  {r: 0, g: 80,  b: 0}];
+   var tone = game.rnd.pick(tonesList);
+   bmd.replaceRGB(255, 150, 255, 255,
+                  tone.r,tone.g, tone.b, 255);
+   game.cache.addSpriteSheet('dynamic', '', bmd.canvas, 15, 14, 20, 0, 0);
+   Phaser.Sprite.call(this, game, pos.x, pos.y-1, 'dynamic');
 
    game.add.existing(this);
    game.physics.arcade.enable(this);
