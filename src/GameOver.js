@@ -47,6 +47,6 @@ KnugenGame.GameOver.prototype = {
       },
       restartGame: function() {
       // start the Game state
-      this.state.start('MainMenu');
+      this.state.start('Highscore');
    }
 };
