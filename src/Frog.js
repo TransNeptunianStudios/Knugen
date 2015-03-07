@@ -6,7 +6,7 @@ Frog = function(game, pos, physicalGroup, knugen) {
    this.physicalGroup = physicalGroup;
    this.croakSound = this.game.add.audio('croak', 0.9, false);
 
-   bmd = game.make.bitmapData(128, 48);
+   bmd = game.make.bitmapData(360, 16);
    bmd.load('frog');
    // Color tone
    var tonesList =[{r: 128, g: 255, b: 0},
@@ -17,7 +17,7 @@ Frog = function(game, pos, physicalGroup, knugen) {
    var tone = game.rnd.pick(tonesList);
    bmd.replaceRGB(255, 150, 255, 255,
                   tone.r,tone.g, tone.b, 255);
-   game.cache.addSpriteSheet('dynamic', '', bmd.canvas, 15, 14, 20, 0, 0);
+   game.cache.addSpriteSheet('dynamic', '', bmd.canvas, 15, 14, 24, 0, 0);
    Phaser.Sprite.call(this, game, pos.x, pos.y-1, 'dynamic');
 
    game.add.existing(this);
@@ -31,7 +31,8 @@ Frog = function(game, pos, physicalGroup, knugen) {
 
    this.anchor.setTo(0.5, 1);
    this.body.collideWorldBounds = true;
-   this.body.height = 11;
+   this.body.height = 9;
+   this.body.width = 14;
 
    this.allLines = [];
 
@@ -115,9 +116,7 @@ Frog.prototype.jump = function() {
    this.body.velocity.y = Math.sin(angle) * this.speed;
 
    this.setAnimation(Phaser.Math.radToDeg(angle));
-
    this.croak();
-
    this.game.time.events.add(1000, this.setIdle, this);
 }
 
