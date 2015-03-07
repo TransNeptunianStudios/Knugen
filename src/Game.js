@@ -11,6 +11,7 @@ KnugenGame.Game.prototype = {
 
 		// display ground
 		this.game.add.sprite(0, 0, 'garden');
+		this.clouds = this.game.add.tileSprite(0, 0, this.game.width, 23, 'clouds');
 
 		this.physicalGroup = this.game.add.group();
 		this.physicalGroup.physicsBodyType = Phaser.Physics.ARCADE;
@@ -18,7 +19,6 @@ KnugenGame.Game.prototype = {
 
 		// Create garden
 		this.garden = new Garden(this.game, this.physicalGroup);
-		this.clouds = this.add.tileSprite(0, 0, this.game.width, 23, 'clouds');
 
 		// Create Drottningholm
 		this.castle = new Castle(this.game, this.physicalGroup);
