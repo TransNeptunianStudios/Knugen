@@ -21,6 +21,7 @@ Knugen = function(game) {
 
    // Change Knug hitbox, only body, not head
    this.body.height = 17;
+   this.body.width = 12;
 }
 
 Knugen.prototype = Object.create(Phaser.Sprite.prototype);
