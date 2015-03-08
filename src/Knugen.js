@@ -22,6 +22,8 @@ Knugen = function(game) {
    // Change Knug hitbox, only body, not head
    this.body.height = 17;
    this.body.width = 12;
+
+   this.cursors = game.input.keyboard.createCursorKeys();
 }
 
 Knugen.prototype = Object.create(Phaser.Sprite.prototype);
@@ -36,7 +38,7 @@ Knugen.prototype.update = function() {
       this.body.velocity = this.game.physics.arcade.velocityFromRotation(radToPointer, 60);
       this.setAnimation(Phaser.Math.radToDeg(radToPointer));
    }
-   else {
+   else if( ! this.usingKeyboard() ){
       this.body.velocity.x = 0;
       this.body.velocity.y = 0;
 
@@ -57,6 +59,38 @@ Knugen.prototype.update = function() {
       this.animations.stop();
    }
 }
+
+Knugen.prototype.usingKeyboard = function(){
+   var used = false;
+   if(this.cursors.left.isDown){
+      this.body.velocity.x = -60
+      this.animations.play('west');
+      used = true;
+   }
+   else if(this.cursors.right.isDown){
+      this.body.velocity.x = 60
+      this.animations.play('east');
+      used = true;
+   }
+   else
+      this.body.velocity.x = 0;
+
+   if(this.cursors.up.isDown){
+      this.body.velocity.y = -60
+      this.animations.play('north');
+      used = true;
+   }
+   else if(this.cursors.down.isDown){
+      this.body.velocity.y = 60
+      this.animations.play('south');
+      used = true;
+   }
+   else
+      this.body.velocity.y = 0;
+
+      return used;
+}
+
 
 Knugen.prototype.setAnimation = function(deg) {
 
