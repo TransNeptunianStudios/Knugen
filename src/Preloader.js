@@ -37,6 +37,7 @@ KnugenGame.Preloader.prototype = {
 		this.load.audio('croak', 'assets/audio/13598_weldonsmith_frog1alien.ogg');
 		this.load.audio('crown', 'assets/audio/Crown.ogg');
 		this.load.audio('gate', 'assets/audio/Gate.ogg');
+		this.load.audio('death', 'assets/audio/Death.ogg');
 
 	},
 	create: function(){

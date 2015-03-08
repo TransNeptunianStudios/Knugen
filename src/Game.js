@@ -27,6 +27,7 @@ KnugenGame.Game.prototype = {
 		// Create Knugen
 		this.knugen = new Knugen(this.game);
 		this.physicalGroup.add(this.knugen);
+		this.deathSound = this.game.add.audio('death', 0.9, false);
 
 		// Create Crowns
 		this.crowns = new Crowns(this.game, this.physicalGroup, this.knugen, 30, 0);
@@ -80,6 +81,7 @@ KnugenGame.Game.prototype = {
 
 	killKnugen: function(theKnug, stuff) {
 		if(stuff.frog){
+			this.deathSound.play();
 			theKnug.kill();
 			this.state.start('GameOver');
 		}
