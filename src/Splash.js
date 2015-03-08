@@ -8,7 +8,7 @@ KnugenGame.Splash.prototype = {
       logo.scale.setTo(0.6);
 
       var music = this.game.add.audio('bgMusic', 0.7, true);
-      //music.play();
+      music.play();
 
       // Music credits
       var text = "Music:\nMinstrel Guild - Kevin MacLeod";
