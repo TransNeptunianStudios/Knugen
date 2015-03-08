@@ -32,8 +32,10 @@ KnugenGame.Game.prototype = {
 		this.croakSound = this.game.add.audio('crown', 0.9, false);
 
 		this.game.points = 0;
+		var crown = this.game.add.sprite(2, 2, 'crown');
 		var style = { font: "14px Arial", fill: "#000000", align: "center" };
-		this.pointsText = this.game.add.text(5, 5, 'Kronor: ' + this.game.points, style);
+		this.pointsText = this.game.add.text(20, 3, '', style);
+		this.pointsText.setText(this.game.points);
 
 		this.game.time.events.loop(Phaser.Timer.SECOND*5, this.releaseFrog, this);
 	},
@@ -70,7 +72,7 @@ KnugenGame.Game.prototype = {
 		if(collector.knugen){
 			this.croakSound.play();
 			this.game.points++;
-			this.pointsText.setText('Kronor: ' + this.game.points);
+			this.pointsText.setText(this.game.points);
 		}
 	},
 
