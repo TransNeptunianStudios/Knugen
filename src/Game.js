@@ -22,6 +22,7 @@ KnugenGame.Game.prototype = {
 
 		// Create Drottningholm
 		this.castle = new Castle(this.game, this.physicalGroup);
+		this.gateSound = this.game.add.audio('gate', 0.5, false);
 
 		// Create Knugen
 		this.knugen = new Knugen(this.game);
@@ -57,6 +58,7 @@ KnugenGame.Game.prototype = {
 	releaseFrog: function() {
 		// Open the gate
 		this.castle.openGate();
+		this.gateSound.play();
 
 		// Spawn a frog
 		this.physicalGroup.add(new Frog(this.game, this.castle.centerFloor, this.physicalGroup, this.knugen));
