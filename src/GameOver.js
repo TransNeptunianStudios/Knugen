@@ -33,7 +33,7 @@ KnugenGame.GameOver.prototype = {
 
       // draw a speach bubble
       graphics.beginFill(0xFFFFFF, 1);
-      graphics.drawRoundedRect(20, bubbleStart, 200, 20 + quote.height, 10);
+      graphics.drawRoundedRect(20, bubbleStart, quote.width+10, 20 + quote.height, 10);
 
       graphics.moveTo(50,quote.height + bubbleStart);
       graphics.lineTo(90, quote.height + bubbleStart);
