@@ -40,9 +40,6 @@ KnugenGame.GameOver.prototype = {
       graphics.lineTo(130, 265);
       graphics.endFill();
 
-      // Will be changed to some highscore list
-      this.add.text(10, 350, "Kronor: " + this.game.points, { font: "10px Arial"});
-
       this.game.input.onDown.add(this.restartGame, this);
       },
       restartGame: function() {

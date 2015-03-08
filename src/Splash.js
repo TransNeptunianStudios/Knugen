@@ -24,7 +24,7 @@ KnugenGame.Splash.prototype = {
       this.game.input.onDown.add(this.startGame, this);
    },
    startGame: function() {
-      // start the Game state
+      // start the Game state      
       this.state.start('MainMenu');
    }
 };

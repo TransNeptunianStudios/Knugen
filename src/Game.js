@@ -35,7 +35,7 @@ KnugenGame.Game.prototype = {
 		var crown = this.game.add.sprite(2, 2, 'crown');
 		var style = { font: "14px Arial", fill: "#000000", align: "center" };
 		this.pointsText = this.game.add.text(20, 3, '', style);
-		this.pointsText.setText(this.game.points);
+		this.pointsText.setText(this.game.points); // why is this needed?
 
 		this.game.time.events.loop(Phaser.Timer.SECOND*5, this.releaseFrog, this);
 	},
