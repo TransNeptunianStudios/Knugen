@@ -11,7 +11,7 @@ KnugenGame.GameOver.prototype = {
       var groda = this.game.rnd.pick(grodor);
 
       // Header
-      var text = "Groda " + groda.nr + " / " + totalGrodor + ": ";
+      var text = "Groda " + groda.nr + ": ";
       var style = { font: "20px Arial", fill: "#000000", align: "center" };
       var header = this.game.add.text(KnugenGame.WIDTH/2, 10, text, style);
       header.anchor.setTo(0.5, 0);
@@ -40,10 +40,35 @@ KnugenGame.GameOver.prototype = {
       graphics.lineTo(130, 265);
       graphics.endFill();
 
+      this.setFrogProgress(groda.nr, grodor.length);
+
       this.game.input.onDown.add(this.restartGame, this);
       },
       restartGame: function() {
       // start the Game state
       this.state.start('Highscore');
+   },
+   setFrogProgress: function(frogId){
+      if (!this.supports_html5_storage()) { console.log("NOO"); return false; }
+
+      var frogsSeen = JSON.parse(localStorage.getItem("Frogs"));
+
+      if(!frogsSeen){
+         var frogsSeen = new Array();
+         frogsSeen.push(frogId);
+         localStorage["Frogs"] = JSON.stringify(frogsSeen);
+      }
+      else if (frogsSeen.indexOf(frogId) == -1){
+         frogsSeen.push(frogId);
+         localStorage["Frogs"] = JSON.stringify(frogsSeen);
+      }
+      console.log(frogsSeen);
+   },
+   supports_html5_storage: function () {
+      try {
+         return 'localStorage' in window && window['localStorage'] !== null;
+      } catch (e) {
+         return false;
+      }
    }
 };
