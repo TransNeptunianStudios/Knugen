@@ -8,7 +8,7 @@ KnugenGame.Highscore.prototype = {
          context: this,
          url: 'php/getHighscore.php',
          type: 'GET',
-         success: this.gotHighScore
+         success: this.swowHighscore
       });
 
       this.add.sprite(0, 0, 'gameOverScreen');
@@ -49,7 +49,7 @@ KnugenGame.Highscore.prototype = {
 
       this.game.input.onDown.add(this.startGame, this);
    },
-   gotHighScore: function(data){
+   swowHighscore: function(data){
       var highscore = JSON.parse(data);
 
       // Sort list
@@ -57,14 +57,17 @@ KnugenGame.Highscore.prototype = {
          return b.score - a.score;
       });
 
-      var style = { font: "10px Arial", fill: "#000000", align: "center" };
-      var y = 50
-      for(i = 0; i < highscore.length; ++i){
-         this.game.add.text(20, y, i+1, style);
-         this.game.add.text(80, y, highscore[i].nick, style);
-         this.game.add.text(200, y, highscore[i].score, style);
-         y += 20;
+      for(i = 0; i < highscore.length && i < 10; ++i){
+         this.addScoreLine(i+1, highscore[i].nick, highscore[i].score);
       }
+   },
+   addScoreLine: function(place, nick, score){
+      var style = { font: "10px Arial", fill: "#000000", align: "center" };
+
+      var y = 30 + (place * 20);
+      this.game.add.text(20, y, place, style);
+      this.game.add.text(80, y, nick, style);
+      this.game.add.text(200, y, score, style);
    },
    compareScore: function(score){
       if (!this.supports_html5_storage()) { console.log("NOO"); return false; }
