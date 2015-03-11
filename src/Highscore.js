@@ -8,7 +8,7 @@ KnugenGame.Highscore.prototype = {
          context: this,
          url: 'php/getHighscore.php',
          type: 'GET',
-         success: this.swowHighscore
+         success: this.manageHighscore
       });
 
       this.add.sprite(0, 0, 'gameOverScreen');
@@ -49,16 +49,20 @@ KnugenGame.Highscore.prototype = {
 
       this.game.input.onDown.add(this.startGame, this);
    },
-   swowHighscore: function(data){
-      var highscore = JSON.parse(data);
+   manageHighscore: function(data){
+      var highscore;
+      if(data == "0 results")
+         highscore = new Array();
+      else
+         highscore = JSON.parse(data);
 
       // Sort list
       highscore.sort(function(a, b){
          return b.score - a.score;
       });
 
-      if(this.game.points > highscore[highscore.length-1].score
-         || highscore.length < 10){
+      if(highscore.length < 10
+         || this.game.points > highscore[highscore.length-1].score){
          var nick = prompt("Highscore! Please enter your nick", "Knugen");
          var newEntry = {nick: nick, score: this.game.points};
          $.ajax({
