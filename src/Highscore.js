@@ -20,19 +20,19 @@ KnugenGame.Highscore.prototype = {
       graphics.alpha = 0.5;
 
       // Header
-      var text = "HighScore";
+      var text = "Topplista";
       var style = { font: "20px Arial", fill: "#000000", align: "center" };
       var header = this.game.add.text(KnugenGame.WIDTH/2, 10, text, style);
       header.anchor.setTo(0.5, 0);
 
       // Score
-      var text = "Score: " + this.game.points;
+      var text = "Poäng: " + this.game.points;
       var style = { font: "15px Arial", fill: "#000000", align: "center" };
       var score = this.game.add.text(15, 330, text, style);
       score.anchor.setTo(0, 0);
 
       // Best
-      var text = "Best: " + this.compareScore(this.game.points);
+      var text = "Bäst: " + this.compareScore(this.game.points);
       var style = { font: "15px Arial", fill: "#000000", align: "center" };
       var best = this.game.add.text(15, 350, text, style);
       best.anchor.setTo(0, 0);
@@ -63,7 +63,7 @@ KnugenGame.Highscore.prototype = {
 
       if(highscore.length < 10
          || this.game.points > highscore[highscore.length-1].score){
-         var nick = prompt("Highscore! Please enter your nick", "Knugen");
+         var nick = prompt("Grattis! Skriv in namn för att hamna på topplistan!", "Knugen");
          var newEntry = {nick: nick, score: this.game.points};
          $.ajax({
             url: "php/setHighscore.php",
