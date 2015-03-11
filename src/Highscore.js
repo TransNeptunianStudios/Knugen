@@ -57,17 +57,37 @@ KnugenGame.Highscore.prototype = {
          return b.score - a.score;
       });
 
+      if(this.game.points > highscore[highscore.length-1].score
+         || highscore.length < 10){
+         var nick = prompt("Highscore! Please enter your nick", "Knugen");
+         var newEntry = {nick: nick, score: this.game.points};
+         $.ajax({
+            url: "php/setHighscore.php",
+            type: "POST",
+            data: newEntry
+         });
+         newEntry.isPlayer = true;
+         highscore.push(newEntry);
+      }
+
+      // Sort list
+      highscore.sort(function(a, b){
+         return b.score - a.score;
+      });
+
       for(i = 0; i < highscore.length && i < 10; ++i){
-         this.addScoreLine(i+1, highscore[i].nick, highscore[i].score);
+         this.addScoreLine(i+1, highscore[i]);
       }
    },
-   addScoreLine: function(place, nick, score){
-      var style = { font: "10px Arial", fill: "#000000", align: "center" };
+   addScoreLine: function(place, entry){
+      var style = { font: "15px Arial", fill: "#000000", align: "center" };
+      if(entry.isPlayer)
+         style.fill = "#FF0000";
 
-      var y = 30 + (place * 20);
+      var y = 30 + (place * 23);
       this.game.add.text(20, y, place, style);
-      this.game.add.text(80, y, nick, style);
-      this.game.add.text(200, y, score, style);
+      this.game.add.text(80, y, entry.nick, style);
+      this.game.add.text(200, y, entry.score, style);
    },
    compareScore: function(score){
       if (!this.supports_html5_storage()) { console.log("NOO"); return false; }

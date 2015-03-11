@@ -62,7 +62,6 @@ KnugenGame.GameOver.prototype = {
          frogsSeen.push(frogId);
          localStorage["Frogs"] = JSON.stringify(frogsSeen);
       }
-      console.log(frogsSeen);
    },
    supports_html5_storage: function () {
       try {
