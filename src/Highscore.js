@@ -62,7 +62,7 @@ KnugenGame.Highscore.prototype = {
       });
 
       if(highscore.length < 10
-         || this.game.points > highscore[highscore.length-1].score){
+         || this.game.points > highscore[9].score){
          var nick = prompt("Grattis! Skriv in namn för att hamna på topplistan!", "Knugen");
          var newEntry = {nick: nick, score: this.game.points};
          $.ajax({
