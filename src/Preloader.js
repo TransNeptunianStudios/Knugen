@@ -15,6 +15,7 @@ KnugenGame.Preloader.prototype = {
 		// load images
 		this.load.image('TNSlogo', 'assets/TNS_logo.png');
 		this.load.image('menuBackground', 'assets/Menu.png');
+		this.load.image('title', 'assets/Knugen_Title.png');
 		this.load.image('gameOverScreen', 'assets/GameOverScreen.png');
 		this.load.image('garden', 'assets/Garden.png');
 		this.load.image('clouds', 'assets/Clouds.png');
