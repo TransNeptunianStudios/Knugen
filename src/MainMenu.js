@@ -18,6 +18,7 @@ KnugenGame.MainMenu.prototype = {
 		var version = this.game.add.text(5, 385, text, style);
 
 		this.game.add.tween(title).from( { y: -200 }, 1500, Phaser.Easing.Bounce.Out, true);
+		this.game.add.tween(startText).from( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true, 1500);
 
 		this.game.input.onDown.add(this.startGame, this);
 	},
