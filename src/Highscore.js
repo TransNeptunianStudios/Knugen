@@ -127,6 +127,6 @@ KnugenGame.Highscore.prototype = {
    },
    startGame: function() {
       // start the Game state
-      this.state.start('MainMenu');
+      this.state.start('Credits');
    }
 };
