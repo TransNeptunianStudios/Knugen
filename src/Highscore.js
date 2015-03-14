@@ -47,7 +47,7 @@ KnugenGame.Highscore.prototype = {
       graphics.drawRoundedRect(10, 320, frogsSeen.width + 10, 73, 10);
       graphics.alpha = 0.5;
 
-      this.game.input.onDown.add(this.startGame, this);
+      this.game.input.onDown.add(this.gotoCredits, this);
    },
    manageHighscore: function(data){
       var highscore;
@@ -125,8 +125,7 @@ KnugenGame.Highscore.prototype = {
          return false;
       }
    },
-   startGame: function() {
-      // start the Game state
+   gotoCredits: function() {
       this.state.start('Credits');
    }
 };

@@ -12,7 +12,7 @@ KnugenGame.Credits.prototype = {
       TnsLogo.anchor.setTo(0.5, 0);
 
       var text = "http://trans-neptunian-studios.com/";
-      var style = { font: "15px Arial", fill: "#000000", align: "center" };
+      var style = { font: "10px Arial", fill: "#000000", align: "center" };
       var tnsLink = this.game.add.text(KnugenGame.WIDTH/2, 70, text, style);
       tnsLink.anchor.setTo(0.5, 0);
       tnsLink.inputEnabled = true;
