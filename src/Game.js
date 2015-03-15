@@ -55,11 +55,13 @@ KnugenGame.Game.prototype = {
 		this.game.physics.arcade.overlap(this.physicalGroup, this.crowns, this.collectCrown, null, this);
 		this.game.physics.arcade.overlap(this.knugen, this.physicalGroup, this.killKnugen, null, this);
 
-		this.game.physics.arcade.collide(this.physicalGroup, this.castle);
-		this.game.physics.arcade.collide(this.physicalGroup,this.physicalGroup);
+		this.game.physics.arcade.collide(this.physicalGroup,this.physicalGroup, null, function(obj1, obj2){return this.handleFrogCollision(obj1, obj2);}, this);
 
 		// depth sorting
 		this.physicalGroup .sort('y', Phaser.Group.SORT_DECENDING);
+	},
+	handleFrogCollision: function(first, second) {
+		return !(first.frog && second.frog);
 	},
 	releaseFrog: function() {
 		// Open the gate
