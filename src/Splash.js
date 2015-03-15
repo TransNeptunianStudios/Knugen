@@ -8,9 +8,9 @@ KnugenGame.Splash.prototype = {
       logo.scale.setTo(0.6);
 
       var music = this.game.add.audio('bgMusic', 0.7, true);
-      //music.play();
+      music.play();
 
-      var logoFade = this.game.add.tween(logo).to({alpha: 0}, 1000, Phaser.Easing.Linear.None, false, 3000);      
+      var logoFade = this.game.add.tween(logo).to({alpha: 0}, 1000, Phaser.Easing.Linear.None, false, 3000);
       logoFade.onComplete.add(this.startGame, this);
       logoFade.start();
 
