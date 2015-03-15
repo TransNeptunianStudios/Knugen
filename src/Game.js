@@ -52,11 +52,10 @@ KnugenGame.Game.prototype = {
 		this.clouds.tilePosition.x -= 0.1;
 
 		this.game.physics.arcade.overlap(this.knugen, this.crowns, this.collectCrown, null, this);
-		this.game.physics.arcade.overlap(this.physicalGroup, this.crowns, this.collectCrown, null, this);
 		this.game.physics.arcade.overlap(this.knugen, this.physicalGroup, this.killKnugen, null, this);
 
 		this.game.physics.arcade.collide(this.physicalGroup, this.castle);
-		this.game.physics.arcade.collide(this.physicalGroup,this.physicalGroup);
+		this.game.physics.arcade.collide(this.physicalGroup, this.physicalGroup);
 
 		// depth sorting
 		this.physicalGroup .sort('y', Phaser.Group.SORT_DECENDING);
