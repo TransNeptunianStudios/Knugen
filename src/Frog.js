@@ -10,10 +10,9 @@ Frog = function(game, pos, physicalGroup, knugen) {
    bmd.load('frog');
    // Color tone
    var tonesList =[{r: 128, g: 255, b: 0},
-                  {r: 0, g: 128, b: 0},
-                  {r: 150, g: 150, b: 0},
-                  {r: 120, g: 150, b: 0},
-                  {r: 0, g: 80,  b: 0}];
+                   {r: 58, g: 205, b: 100},
+                  {r: 150, g: 150, b: 0}
+                  ];
    var tone = game.rnd.pick(tonesList);
    bmd.replaceRGB(255, 150, 255, 255,
                   tone.r,tone.g, tone.b, 255);
@@ -28,6 +27,7 @@ Frog = function(game, pos, physicalGroup, knugen) {
    this.animations.add('west', [9, 10, 11, 12, 13], 10, true);
    this.animations.add('south', [14, 15, 16, 17, 18], 10, true);
    this.animations.add('east', [19, 20, 21, 22, 23], 10, true);
+   this.frame = 2;
 
    this.anchor.setTo(0.5, 1);
    this.body.collideWorldBounds = true;

@@ -4,12 +4,13 @@ Garden = function(game, physicalGroup) {
    var mid = game.world.width /3;
 
    // create all mazes
-   var maze1 = physicalGroup.create(mid-17, 265, 'maze');
+   var maze1 = physicalGroup.create(mid-16, 267, 'maze');
    maze1.anchor.setTo(0.5, 0);
    maze1.body.immovable = true;
 
-   var maze2 = physicalGroup.create(mid*2 + 17, 265, 'maze');
+   var maze2 = physicalGroup.create(mid*2 + 16, 267, 'maze');
    maze2.anchor.setTo(0.5, 0);
+   maze2.scale.setTo(-1, 1);
    maze2.body.immovable = true;
 
    // Create Fountains

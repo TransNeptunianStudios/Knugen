@@ -42,9 +42,11 @@ KnugenGame.GameOver.prototype = {
 
       this.setFrogProgress(groda.nr, grodor.length);
 
-      this.game.input.onDown.add(this.restartGame, this);
+      this.game.time.events.add(Phaser.Timer.SECOND
+         , function(){this.game.input.onDown.add(this.gotoHighscore, this);}
+         , this);
       },
-      restartGame: function() {
+      gotoHighscore: function() {
       // start the Game state
       this.state.start('Highscore');
    },
@@ -62,7 +64,6 @@ KnugenGame.GameOver.prototype = {
          frogsSeen.push(frogId);
          localStorage["Frogs"] = JSON.stringify(frogsSeen);
       }
-      console.log(frogsSeen);
    },
    supports_html5_storage: function () {
       try {
