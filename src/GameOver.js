@@ -42,7 +42,7 @@ KnugenGame.GameOver.prototype = {
 
       this.setFrogProgress(groda.nr, grodor.length);
 
-      this.game.time.events.add(Phaser.Timer.SECOND
+      this.game.time.events.add(Phaser.Timer.SECOND/2
          , function(){this.game.input.onDown.add(this.gotoHighscore, this);}
          , this);
       },

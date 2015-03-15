@@ -7,21 +7,29 @@ KnugenGame.Credits.prototype = {
 
       // Tns stuff
       var text = "Trans-neptunian Studios";
-      var style = { font: "17px Arial", fill: "#000000", align: "center" };
+      var style = { font: "18px Arial", fill: "#000000", align: "center" };
       var TnsLogo = this.game.add.text(KnugenGame.WIDTH/2, 20, text, style);
       TnsLogo.anchor.setTo(0.5, 0);
 
       var text = "http://trans-neptunian-studios.com/";
-      var style = { font: "10px Arial", fill: "#000000", align: "center" };
+      var style = { font: "11px Arial", fill: "#000000", align: "center" };
       var tnsLink = this.game.add.text(KnugenGame.WIDTH/2, 40, text, style);
       tnsLink.anchor.setTo(0.5, 0);
       tnsLink.inputEnabled = true;
       tnsLink.events.onInputDown.add(this.redirect, this);
 
+      // Credits headers
+      var headerStyle = { font: "Bold 13px Arial", fill: "#000000", align: "center" };
+      var text = "Kodapor\n\n\n\nGrafik\n\n\nMusik\n\n\nLjud";
+      var style = { font: "14px Arial", fill: "#000000", align: "center" };
+      var credits = this.game.add.text(KnugenGame.WIDTH/2, 90, text, headerStyle);
+      credits.anchor.setTo(0.5, 0);
+
       // Credits
-      var text = "Programming\nRobin Reicher\nMikael Larsson\n\nArt\nDavid Levi\n\nMusic\n\"Minstrel Guild\" Kevin MacLeod\n\nSound\n\"Alien Amphibians\" - WeldonSmith\nSFXR";
+      var creditStyle = { font: "Italic 13px Arial", fill: "#000000", align: "center" };
+      var text = "\nRobin Reicher\nMikael Larsson\n\n\nDavid Levi\n\n\n\"Minstrel Guild\" Kevin MacLeod\n\n\n\"Alien Amphibians\" - WeldonSmith\nSFXR";
       var style = { font: "13px Arial", fill: "#000000", align: "center" };
-      var credits = this.game.add.text(KnugenGame.WIDTH/2, 90, text, style);
+      var credits = this.game.add.text(KnugenGame.WIDTH/2, 90, text, creditStyle);
       credits.anchor.setTo(0.5, 0);
 
       this.game.input.onDown.add(this.startGame, this);
