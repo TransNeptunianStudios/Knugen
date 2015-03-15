@@ -40,6 +40,7 @@ KnugenGame.Game.prototype = {
 		this.pointsText.setText(this.game.points); // why is this needed?
 
 		this.game.time.events.loop(Phaser.Timer.SECOND*5, this.releaseFrog, this);
+		//this.game.time.events.add(Phaser.Timer.SECOND*5, this.releaseFrog, this);
 	},
 
 	update: function(){

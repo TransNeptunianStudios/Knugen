@@ -38,29 +38,30 @@ Frog = function(game, pos, physicalGroup, knugen) {
 
    this.physicalGroup.forEach(function(sprite) {
       if (!sprite.frog && !sprite.knugen) {
-         var leftX = sprite.x - sprite.anchor.x * sprite.body.width;
-         var topY = sprite.y - sprite.anchor.y * sprite.body.height;
 
-         this.allLines.push(new Phaser.Line(leftX,
-                                            topY,
-                                            leftX + sprite.body.width,
-                                            topY));
-         this.allLines.push(new Phaser.Line(leftX,
-                                            topY,
-                                            leftX,
-                                            topY + sprite.body.height));
-         this.allLines.push(new Phaser.Line(leftX + sprite.body.width,
-                                            topY,
-                                            leftX + sprite.body.width,
-                                            topY + sprite.body.height));
-         this.allLines.push(new Phaser.Line(leftX,
-                                            topY + sprite.body.height,
-                                            leftX + sprite.body.width,
-                                            topY + sprite.body.height));
+         topLeftCoord = Utils.getTopLeft(sprite);
+
+         this.allLines.push(new Phaser.Line(topLeftCoord.x,
+                                            topLeftCoord.y,
+                                            topLeftCoord.x + sprite.body.width,
+                                            topLeftCoord.y));
+         this.allLines.push(new Phaser.Line(topLeftCoord.x,
+                                            topLeftCoord.y,
+                                            topLeftCoord.x,
+                                            topLeftCoord.y + sprite.body.height));
+         this.allLines.push(new Phaser.Line(topLeftCoord.x + sprite.body.width,
+                                            topLeftCoord.y,
+                                            topLeftCoord.x + sprite.body.width,
+                                            topLeftCoord.y + sprite.body.height));
+         this.allLines.push(new Phaser.Line(topLeftCoord.x,
+                                            topLeftCoord.y + sprite.body.height,
+                                            topLeftCoord.x + sprite.body.width,
+                                            topLeftCoord.y + sprite.body.height));
       }
    }, this);
 
-   this.line = new Phaser.Line(0, 0, 0, 0);
+   this.line1 = new Phaser.Line(0, 0, 0, 0);
+   this.line2 = new Phaser.Line(0, 0, 0, 0);
 
    this.game.time.events.add(1000, this.firstJump, this);
 }
@@ -82,9 +83,6 @@ Frog.prototype.firstJump = function() {
 
 Frog.prototype.jump = function() {
 
-   var angle = this.game.physics.arcade.angleBetween(this, this.knugen);
-   this.line.fromAngle(this.world.x, this.world.y, angle, this.speed);
-
    var degStep = 1;
    var rotStart = 0;
    var changeDir = false;
@@ -96,26 +94,36 @@ Frog.prototype.jump = function() {
       rotStart = -1;
    }
 
-   var totalAddedDeg = 0;
+   var totalAdded = 0;
 
-   while (this.checkIntersection(this.line) && totalAddedDeg < (2*Math.PI)) {
+   var angle = this.game.physics.arcade.angleBetween(Utils.getTopLeft(this),
+                                                     Utils.getTopLeft(this.knugen));
+
+   this.updateLines(angle);
+
+   while (this.checkIntersection() && totalAdded < (2*Math.PI)) {
       if (changeDir) {
          changeDir = false;
          rotStart *= -1;
       }
       else {
-         totalAddedDeg += Phaser.Math.degToRad(degStep);
+         totalAdded += Phaser.Math.degToRad(degStep);
+         changeDir = true;
       }
 
-      this.line.fromAngle(this.world.x, this.world.y, angle + (rotStart * totalAddedDeg), this.speed);
+      this.updateLines(angle + (rotStart * totalAdded));
    }
 
-   angle += totalAddedDeg;
+   if (totalAdded >= (2*Math.PI)) {
+      totalAdded = Phaser.Math.degToRad(this.game.rnd.integerInRange(0, 360));
+   }
+
+   angle += rotStart * totalAdded;
 
    this.body.velocity.x = Math.cos(angle) * this.speed;
    this.body.velocity.y = Math.sin(angle) * this.speed;
 
-   this.setAnimation(Phaser.Math.radToDeg(angle));
+   this.setAnimation(Phaser.Math.radToDeg(Phaser.Math.normalizeAngle(angle)));
    this.croak();
    this.game.time.events.add(1000, this.setIdle, this);
 }
@@ -162,13 +170,33 @@ Frog.prototype.croak = function() {
       this.croakSound.play();
 }
 
-Frog.prototype.checkIntersection = function(ray) {
+Frog.prototype.checkIntersection = function() {
 
    for (var i = 0, len = this.allLines.length; i < len; i++) {
-      if (Phaser.Line.intersects(ray, this.allLines[i])) {
+      if (Phaser.Line.intersects(this.line1, this.allLines[i]) || 
+          Phaser.Line.intersects(this.line2, this.allLines[i])) {
          return true;
       }
    }
 
    return false;
+}
+
+Frog.prototype.updateLines = function(angle) {
+
+   var line1Start;
+   var line2Start;
+   normAngle = Phaser.Math.normalizeAngle(angle);
+
+   if ((normAngle >= 0 && normAngle <= (Math.PI/2)) || (normAngle >= Math.PI && normAngle <= (3*Math.PI/2))) {
+      line1Start = Utils.getTopLeft(this);
+      line2Start = Utils.getBottomRight(this);
+   }
+   else if (normAngle >= (Math.PI/2) && normAngle <= Math.PI || (normAngle >= (3*Math.PI/2) && normAngle <= (2*Math.PI))) {
+      line1Start = Utils.getTopRight(this);
+      line2Start = Utils.getBottomLeft(this);
+   }
+
+   this.line1.fromAngle(line1Start.x, line1Start.y, angle, this.speed);
+   this.line2.fromAngle(line2Start.x, line2Start.y, angle, this.speed);   
 }
