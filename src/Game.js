@@ -44,7 +44,8 @@ KnugenGame.Game.prototype = {
 		//this.game.time.events.add(Phaser.Timer.SECOND*5, this.releaseFrog, this);
 	},
 
-	update: function(){
+	update: function() {
+
 		// Only needs to be called after each crown is created...but hard
 		this.game.world.bringToTop(this.physicalGroup);
 
@@ -56,19 +57,19 @@ KnugenGame.Game.prototype = {
 		this.game.physics.arcade.overlap(this.knugen, this.physicalGroup, this.killKnugen, null, this);
 
 		this.game.physics.arcade.collide(this.physicalGroup, this.castle);
-
-		this.game.physics.arcade.collide(this.physicalGroup, this.physicalGroup);
 		
-		this.game.physics.arcade.collide(this.physicalGroup,this.physicalGroup, null, function(obj1, obj2) {
+		this.game.physics.arcade.collide(this.physicalGroup, this.physicalGroup, null, function(obj1, obj2) {
 			return this.handleFrogCollision(obj1, obj2);
 		}, this);
 
 		// depth sorting
 		this.physicalGroup .sort('y', Phaser.Group.SORT_DECENDING);
 	},
+
 	handleFrogCollision: function(first, second) {
 		return !(first.frog && second.frog);
 	},
+
 	releaseFrog: function() {
 		// Open the gate
 		this.castle.openGate();
@@ -99,5 +100,14 @@ KnugenGame.Game.prototype = {
 			this.state.start('GameOver');
 		}
 
-	}
+	},
+
+	// render: function() {
+	//  	this.crowns.render();
+	//  	this.physicalGroup.forEach(function(child) {
+	//  		if (child.render) {
+	//  			child.render();
+	//  		}
+	//  	}, this);
+	// }
 };

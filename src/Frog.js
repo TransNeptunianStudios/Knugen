@@ -96,10 +96,10 @@ Frog.prototype.jump = function() {
 
    var totalAdded = 0;
 
-   var angle = this.game.physics.arcade.angleBetween(Utils.getTopLeft(this),
-                                                     Utils.getTopLeft(this.knugen));
+   this.angle = this.game.physics.arcade.angleBetween(Utils.getTopLeft(this),
+                                                      Utils.getTopLeft(this.knugen));
 
-   this.updateLines(angle);
+   this.updateLines(this.angle);
 
    while (this.checkIntersection() && totalAdded < (2*Math.PI)) {
       if (changeDir) {
@@ -111,19 +111,19 @@ Frog.prototype.jump = function() {
          changeDir = true;
       }
 
-      this.updateLines(angle + (rotStart * totalAdded));
+      this.updateLines(this.angle + (rotStart * totalAdded));
    }
 
    if (totalAdded >= (2*Math.PI)) {
       totalAdded = Phaser.Math.degToRad(this.game.rnd.integerInRange(0, 360));
    }
 
-   angle += rotStart * totalAdded;
+   this.angle += rotStart * totalAdded;
 
-   this.body.velocity.x = Math.cos(angle) * this.speed;
-   this.body.velocity.y = Math.sin(angle) * this.speed;
+   this.body.velocity.x = Math.cos(this.angle) * this.speed;
+   this.body.velocity.y = Math.sin(this.angle) * this.speed;
 
-   this.setAnimation(Phaser.Math.radToDeg(Phaser.Math.normalizeAngle(angle)));
+   this.setAnimation(Phaser.Math.radToDeg(Phaser.Math.normalizeAngle(this.angle)));
    this.croak();
    this.game.time.events.add(1000, this.setIdle, this);
 }
@@ -155,11 +155,11 @@ Frog.prototype.setIdle = function(){
 
 Frog.prototype.setAnimation = function(deg) {
 
-   if (deg < -45.0 && deg > -135.0)
+   if (deg >= 225.0 &&  deg <= 315.0)
      this.animations.play('north');
-   else if (deg < -135.0 || deg > 145.0)
+   else if (deg >= 135.0 && deg <= 225.0)
      this.animations.play('west');
-   else if (deg < 145.0 && deg > 45.0)
+   else if (deg >= 45.0 && deg <= 135.0)
      this.animations.play('south');
    else
      this.animations.play('east');
@@ -188,11 +188,11 @@ Frog.prototype.updateLines = function(angle) {
    var line2Start;
    normAngle = Phaser.Math.normalizeAngle(angle);
 
-   if ((normAngle >= 0 && normAngle <= (Math.PI/2)) || (normAngle >= Math.PI && normAngle <= (3*Math.PI/2))) {
+   if ((normAngle >= Math.PI/2 && normAngle <= Math.PI) || (normAngle >= (3*Math.PI/2) && normAngle <= 2*Math.PI)) {
       line1Start = Utils.getTopLeft(this);
       line2Start = Utils.getBottomRight(this);
    }
-   else if (normAngle >= (Math.PI/2) && normAngle <= Math.PI || (normAngle >= (3*Math.PI/2) && normAngle <= (2*Math.PI))) {
+   else if ((normAngle >= Math.PI && normAngle <= (3*Math.PI/2)) || (normAngle >= 0 && normAngle <= Math.PI/2)) {
       line1Start = Utils.getTopRight(this);
       line2Start = Utils.getBottomLeft(this);
    }
@@ -200,3 +200,9 @@ Frog.prototype.updateLines = function(angle) {
    this.line1.fromAngle(line1Start.x, line1Start.y, angle, this.speed);
    this.line2.fromAngle(line2Start.x, line2Start.y, angle, this.speed);   
 }
+
+// Frog.prototype.render = function() {
+//    this.game.debug.body(this);
+//    this.game.debug.geom(this.line1);
+//    this.game.debug.geom(this.line2);
+// }

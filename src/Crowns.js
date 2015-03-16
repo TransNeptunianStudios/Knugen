@@ -4,17 +4,21 @@ Crowns = function(game, physicalGroup, knugen) {
    this.enableBody = true;
    this.crownSize = 16;
 
-   var rectArray = [];
+   this.rectArray = [];
 
-   var extractor = function(child, ra) {
-      ra.push(new Phaser.Rectangle(child.x - child.anchor.x * child.width,
-                                   child.y - child.anchor.y * child.height,
-                                   child.width,
-                                   child.height));
-   };
+   physicalGroup.forEach(function(child, ra) {
 
-   physicalGroup.forEach(extractor, this, false, rectArray);
-   extractor(knugen, rectArray);
+      if (!child.knugen) {
+         
+         var topLeft = Utils.getTopLeft(child);
+      
+         ra.push(new Phaser.Rectangle(topLeft.x,
+                                      topLeft.y,
+                                      child.width * child.scale.x,
+                                      child.height * child.scale.y));
+   }
+
+   }, this, false, this.rectArray);
 
    this.validPositions = [];
 
@@ -22,10 +26,11 @@ Crowns = function(game, physicalGroup, knugen) {
       for (var j = 0; j < game.height-this.crownSize; j++) {
 
          var tmp = new Phaser.Rectangle(i, j, this.crownSize, this.crownSize);
+
          var ok = true;
 
-         for (var k = 0; k < rectArray.length; k++) {
-            if (Phaser.Rectangle.intersects(tmp, rectArray[k])) {
+         for (var k = 0; k < this.rectArray.length; k++) {
+            if (Phaser.Rectangle.intersects(tmp, this.rectArray[k])) {
                ok = false;
                break;
             }
@@ -58,3 +63,9 @@ Crowns.prototype.spawnCrown = function() {
       }
    }
 }
+
+// Crowns.prototype.render = function() {
+//    for (var i = 0; i < this.rectArray.length; i++) {
+//       this.game.debug.geom(this.rectArray[i]);
+//    }
+// }
