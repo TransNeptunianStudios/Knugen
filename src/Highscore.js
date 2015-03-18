@@ -65,9 +65,9 @@ KnugenGame.Highscore.prototype = {
          || this.game.points > highscore[9].score){
 
          var nick = prompt("Grattis! Skriv in namn för att hamna på topplistan!", "Knugen");
-         while(person1.length > 15){
-            alert("Max 15 tecken!")
-            person1 = prompt("Skriv in namn för highscore","Knugen");
+         while(nick.length > 15){
+            alert("Max 15 tecken!");
+            nick = prompt("Skriv in namn för highscore","Knugen");
          }
 
          var newEntry = {nick: nick, score: this.game.points};
