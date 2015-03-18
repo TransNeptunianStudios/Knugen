@@ -9,9 +9,9 @@ Crowns = function(game, physicalGroup, knugen) {
    physicalGroup.forEach(function(child, ra) {
 
       if (!child.knugen) {
-         
+
          var topLeft = Utils.getTopLeft(child);
-      
+
          ra.push(new Phaser.Rectangle(topLeft.x,
                                       topLeft.y,
                                       child.width * child.scale.x,
@@ -58,6 +58,7 @@ Crowns.prototype.spawnCrown = function() {
       if (index < this.validPositions.length) {
          var sprite = this.create(this.validPositions[index].x, this.validPositions[index].y, 'crown');
          sprite.alpha = 0;
+         sprite.super = true; // Maybe not always..
          this.game.add.tween(sprite).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
          break;
       }

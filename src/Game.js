@@ -67,11 +67,9 @@ KnugenGame.Game.prototype = {
 		// depth sorting
 		this.physicalGroup .sort('y', Phaser.Group.SORT_DECENDING);
 	},
-
 	handleFrogCollision: function(first, second) {
 		return !(first.frog && second.frog);
 	},
-
 	releaseFrog: function() {
 		// Open the gate
 		this.castle.openGate();
@@ -83,22 +81,20 @@ KnugenGame.Game.prototype = {
 		// close gate
 		this.game.time.events.add(Phaser.Timer.SECOND*1.5, this.castle.closeGate, this.castle);
 	},
-
 	collectCrown: function(collector, crown) {
-		crown.kill();
-		this.crowns.scheduleNewCrown();
-
 		if(collector.knugen){
-			if(!crown.super){
+			if(crown.super){
+				this.superCrownSound.play();
+				this.knugen.activateSuperKnugPowers();
+			}
+			else{
 				this.crownSound.play();
 				this.game.points++;
 				this.pointsText.setText(this.game.points);
 			}
-			else{
-				this.superCrownSound.play();
-				this.knugen.activateSuperKnugPowers();
-			}
 		}
+		crown.kill();
+		this.crowns.scheduleNewCrown();
 	},
 
 	killKnugen: function(theKnug, stuff) {

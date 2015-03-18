@@ -106,4 +106,7 @@ Knugen.prototype.setAnimation = function(deg) {
 
 Knugen.prototype.activateSuperKnugPowers = function() {
    this.isSuper = true;
+
+   this.game.add.tween(this).to( { tint: 0x00FFFF }, 1000, Phaser.Easing.Quadratic.InOut, true, 0, true, true);
+
 }
