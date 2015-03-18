@@ -37,9 +37,10 @@ KnugenGame.Preloader.prototype = {
 		this.load.audio('bgMusic', 'assets/audio/Minstrel_Guild.ogg');
 		this.load.audio('croak', 'assets/audio/13598_weldonsmith_frog1alien.ogg');
 		this.load.audio('crown', 'assets/audio/Crown.ogg');
+		this.load.audio('superCrown', 'assets/audio/SuperCrown.ogg');
 		this.load.audio('gate', 'assets/audio/Gate.ogg');
 		this.load.audio('death', 'assets/audio/Death.ogg');
-
+		this.load.audio('frogDeath', 'assets/audio/FrogExplosion.ogg');
 	},
 	create: function(){
 		// start the MainMenu state
