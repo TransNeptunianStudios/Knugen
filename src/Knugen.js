@@ -1,6 +1,7 @@
 Knugen = function(game) {
 
   this.knugen = true;
+  this.isSuper = false;
 
    Phaser.Sprite.call(this, game, game.world.width/2, game.world.height/2, 'knugen');
 
@@ -91,7 +92,6 @@ Knugen.prototype.usingKeyboard = function(){
       return used;
 }
 
-
 Knugen.prototype.setAnimation = function(deg) {
 
    if (deg < -45.0 && deg > -135.0)
@@ -102,4 +102,8 @@ Knugen.prototype.setAnimation = function(deg) {
      this.animations.play('south');
    else
      this.animations.play('east');
+}
+
+Knugen.prototype.activateSuperKnugPowers = function() {
+   this.isSuper = true;
 }

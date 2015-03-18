@@ -31,7 +31,11 @@ KnugenGame.Game.prototype = {
 
 		// Create Crowns
 		this.crowns = new Crowns(this.game, this.physicalGroup, this.knugen, 30, 0);
-		this.croakSound = this.game.add.audio('crown', 0.9, false);
+		this.crownSound = this.game.add.audio('crown', 0.9, false);
+		this.superCrownSound = this.game.add.audio('superCrown', 1.0, false);
+
+		// Set frog sound
+		this.frogDeath = this.game.add.audio('frogDeath', 0.9, false);
 
 		this.game.points = 0;
 		var crown = this.game.add.sprite(2, 2, 'crown');
@@ -39,9 +43,7 @@ KnugenGame.Game.prototype = {
 		this.pointsText = this.game.add.text(20, 3, '', style);
 		this.pointsText.setText(this.game.points); // why is this needed?
 
-
 		this.game.time.events.loop(Phaser.Timer.SECOND*5, this.releaseFrog, this);
-		//this.game.time.events.add(Phaser.Timer.SECOND*5, this.releaseFrog, this);
 	},
 
 	update: function() {
@@ -53,11 +55,11 @@ KnugenGame.Game.prototype = {
 		this.clouds.tilePosition.x -= 0.1;
 
 		this.game.physics.arcade.overlap(this.knugen, this.crowns, this.collectCrown, null, this);
-		
+
 		this.game.physics.arcade.overlap(this.knugen, this.physicalGroup, this.killKnugen, null, this);
 
 		this.game.physics.arcade.collide(this.physicalGroup, this.castle);
-		
+
 		this.game.physics.arcade.collide(this.physicalGroup, this.physicalGroup, null, function(obj1, obj2) {
 			return this.handleFrogCollision(obj1, obj2);
 		}, this);
@@ -87,27 +89,29 @@ KnugenGame.Game.prototype = {
 		this.crowns.scheduleNewCrown();
 
 		if(collector.knugen){
-			this.croakSound.play();
-			this.game.points++;
-			this.pointsText.setText(this.game.points);
+			if(!crown.super){
+				this.crownSound.play();
+				this.game.points++;
+				this.pointsText.setText(this.game.points);
+			}
+			else{
+				this.superCrownSound.play();
+				this.knugen.activateSuperKnugPowers();
+			}
 		}
 	},
 
 	killKnugen: function(theKnug, stuff) {
 		if(stuff.frog){
-			this.deathSound.play();
-			theKnug.kill();
-			this.state.start('GameOver');
+			if(theKnug.isSuper){
+				this.frogDeath.play();
+				stuff.kill();
+			}
+			else{
+				this.deathSound.play();
+				theKnug.kill();
+				this.state.start('GameOver');
+			}
 		}
-
-	},
-
-	// render: function() {
-	//  	this.crowns.render();
-	//  	this.physicalGroup.forEach(function(child) {
-	//  		if (child.render) {
-	//  			child.render();
-	//  		}
-	//  	}, this);
-	// }
+	}
 };
