@@ -99,6 +99,10 @@ Frog.prototype.jump = function() {
    this.angle = this.game.physics.arcade.angleBetween(Utils.getTopLeft(this),
                                                       Utils.getTopLeft(this.knugen));
 
+   if (this.knugen.super) {
+      this.angle += Math.PI;
+   }
+
    this.updateLines(this.angle);
 
    while (this.checkIntersection() && totalAdded < (2*Math.PI)) {
