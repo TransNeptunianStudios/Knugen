@@ -113,19 +113,33 @@ Knugen.prototype.setAnimation = function(deg) {
 
 Knugen.prototype.activateSuperKnugPowers = function() {
    this.super = true;
-   this.superSprite.visible = true;   
+   this.superSprite.visible = true;
+
+   if(this.superTween)
+      this.superTween.stop();
+
+   this.superSprite.alpha = 0.0;
    this.superTween = this.game.add.tween(this.superSprite).to({alpha: 0.6}, 100, Phaser.Easing.Quadratic.InOut, true, 0, -1, true);
-   this.game.time.events.add(5000, this.superWarning, this);
+
+   if(this.superTimer)
+      this.game.time.events.remove(this.superTimer);
+
+   this.superTimer = this.game.time.events.add(5000, this.superWarning, this);
 }
 
 Knugen.prototype.superWarning = function() {
-   this.superTween.stop();
-   this.warningTween = this.game.add.tween(this.superSprite).to({alpha: 0.6}, 500, Phaser.Easing.Quadratic.InOut, true, 0, -1, true);
-   this.game.time.events.add(2000, this.deactivateSuperKnugPowers, this);
+   if(this.superTween)
+      this.superTween.stop();
+
+   this.superSprite.alpha = 0.0;
+   this.superTween = this.game.add.tween(this.superSprite).to({alpha: 0.6}, 500, Phaser.Easing.Quadratic.InOut, true, 0, -1, true);
+
+   this.superTimer = this.game.time.events.add(Phaser.Timer.SECOND * 2, this.deactivateSuperKnugPowers, this);
 }
+
 
 Knugen.prototype.deactivateSuperKnugPowers = function() {
    this.super = false;
-   this.warningTween.stop();
+   this.superTween.stop();
    this.superSprite.visible = false;
 }
