@@ -99,7 +99,7 @@ KnugenGame.Game.prototype = {
 
 	killKnugen: function(theKnug, stuff) {
 		if(stuff.frog){
-			if(theKnug.isSuper){
+			if(theKnug.super){
 				this.frogDeath.play();
 				stuff.kill();
 			}

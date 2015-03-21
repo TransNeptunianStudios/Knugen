@@ -1,11 +1,18 @@
 Knugen = function(game) {
 
   this.knugen = true;
-  this.isSuper = false;
 
    Phaser.Sprite.call(this, game, game.world.width/2, game.world.height/2, 'knugen');
 
    game.add.existing(this);
+
+   // Setting up super knug power things
+   this.super = false;
+   this.superSprite = game.add.sprite(0, 5, 'aura');
+   this.superSprite.anchor.setTo(0.5, 1);
+   this.superSprite.alpha = 0.0;
+   this.superSprite.visible = false;
+   this.addChild(this.superSprite);
 
    game.physics.arcade.enable(this);
 
@@ -105,8 +112,20 @@ Knugen.prototype.setAnimation = function(deg) {
 }
 
 Knugen.prototype.activateSuperKnugPowers = function() {
-   this.isSuper = true;
+   this.super = true;
+   this.superSprite.visible = true;   
+   this.superTween = this.game.add.tween(this.superSprite).to({alpha: 0.6}, 100, Phaser.Easing.Quadratic.InOut, true, 0, -1, true);
+   this.game.time.events.add(5000, this.superWarning, this);
+}
 
-   this.game.add.tween(this).to( { tint: 0x00FFFF }, 1000, Phaser.Easing.Quadratic.InOut, true, 0, true, true);
+Knugen.prototype.superWarning = function() {
+   this.superTween.stop();
+   this.warningTween = this.game.add.tween(this.superSprite).to({alpha: 0.6}, 500, Phaser.Easing.Quadratic.InOut, true, 0, -1, true);
+   this.game.time.events.add(2000, this.deactivateSuperKnugPowers, this);
+}
 
+Knugen.prototype.deactivateSuperKnugPowers = function() {
+   this.super = false;
+   this.warningTween.stop();
+   this.superSprite.visible = false;
 }
