@@ -28,10 +28,12 @@ KnugenGame.Preloader.prototype = {
 		this.load.image('fountainSmall', 'assets/Small fountain.png');
 		this.load.image('KnugGroda', 'assets/Grodknugen.png');
 		this.load.image('frog', 'assets/Frog.png');
+		this.load.image('explodingFrog', 'assets/ExplodingFrog.png');
 		this.load.image('aura', 'assets/Aura.png');
 
 		// load spritesheets
 		this.load.spritesheet('knugen', 'assets/Knugen.png', 17, 32);
+		this.load.spritesheet('superKnugen', 'assets/SuperKnugen.png', 17, 32);
 		this.load.spritesheet('fountainBig', 'assets/Hero fountain.png', 50, 50);
 
 		// Load music
