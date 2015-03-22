@@ -20,7 +20,7 @@ KnugenGame.Credits.prototype = {
 
       // Credits headers
       var headerStyle = { font: "Bold 13px Arial", fill: "#000000", align: "center" };
-      var text = "Kodapor\n\n\n\nGrafik\n\n\nMusik\n\n\nLjud";
+      var text = "Kod\n\n\n\nGrafik\n\n\nMusik\n\n\nLjud";
       var style = { font: "14px Arial", fill: "#000000", align: "center" };
       var credits = this.game.add.text(KnugenGame.WIDTH/2, 90, text, headerStyle);
       credits.anchor.setTo(0.5, 0);

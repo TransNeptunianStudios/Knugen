@@ -3,7 +3,7 @@ Crowns = function(game, physicalGroup, knugen) {
    this.game = game;
    this.enableBody = true;
    this.crownSize = 16;
-   this.nextSuperCrown = 10;
+   this.nextSuperCrown = 7;
 
    this.rectArray = [];
 
@@ -70,7 +70,7 @@ Crowns.prototype.spawnSuperCrown = function() {
    while (1) {
       var index = this.game.rnd.integerInRange(0, this.validPositions.length);
       if (index < this.validPositions.length && this.latestCrown.position != this.validPositions[index]) {
-         this.superCrown = this.create(this.validPositions[index].x, this.validPositions[index].y, 'crown');
+         this.superCrown = this.create(this.validPositions[index].x, this.validPositions[index].y, 'superCrown');
          this.superCrown.alpha = 0;
          this.superCrown.super = true;
          this.game.add.tween(this.superCrown).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);

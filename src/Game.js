@@ -44,7 +44,6 @@ KnugenGame.Game.prototype = {
 		this.pointsText.setText(this.game.points); // why is this needed?
 
 		this.nrOfReleasedFrogs = 0;
-		this.nextSuperCrown = 10;
 
 		this.game.time.events.loop(Phaser.Timer.SECOND*5, this.releaseFrog, this);
 	},
@@ -85,9 +84,10 @@ KnugenGame.Game.prototype = {
 
 		this.nrOfReleasedFrogs++;
 
-		if (this.nrOfReleasedFrogs >= this.nextSuperCrown) {
-			this.nextSuperCrown += this.nextSuperCrown;
+		if (this.nrOfReleasedFrogs >= this.crowns.nextSuperCrown) {
+			this.crowns.nextSuperCrown += this.crowns.nextSuperCrown;
 			this.crowns.spawnSuperCrown();
+			console.log("SUPER");
 		}
 
 		// close gate

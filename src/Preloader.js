@@ -23,6 +23,7 @@ KnugenGame.Preloader.prototype = {
 		this.load.image('left_gate', 'assets/LeftGate.png');
 		this.load.image('right_gate', 'assets/RightGate.png');
 		this.load.image('crown', 'assets/Crown.png');
+		this.load.image('superCrown', 'assets/SuperCrown.png');
 		this.load.image('maze', 'assets/Maze.png');
 		this.load.image('fountainSmall', 'assets/Small fountain.png');
 		this.load.image('KnugGroda', 'assets/Grodknugen.png');
@@ -30,7 +31,7 @@ KnugenGame.Preloader.prototype = {
 		this.load.image('aura', 'assets/Aura.png');
 
 		// load spritesheets
-		this.load.spritesheet('knugen', 'assets/Knugen.png', 19, 32);
+		this.load.spritesheet('knugen', 'assets/Knugen.png', 17, 32);
 		this.load.spritesheet('fountainBig', 'assets/Hero fountain.png', 50, 50);
 
 		// Load music
