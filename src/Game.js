@@ -43,6 +43,9 @@ KnugenGame.Game.prototype = {
 		this.pointsText = this.game.add.text(20, 3, '', style);
 		this.pointsText.setText(this.game.points); // why is this needed?
 
+		this.nrOfReleasedFrogs = 0;
+		this.nextSuperCrown = 10;
+
 		this.game.time.events.loop(Phaser.Timer.SECOND*5, this.releaseFrog, this);
 	},
 
@@ -67,9 +70,11 @@ KnugenGame.Game.prototype = {
 		// depth sorting
 		this.physicalGroup .sort('y', Phaser.Group.SORT_DECENDING);
 	},
+
 	handleFrogCollision: function(first, second) {
 		return !(first.frog && second.frog);
 	},
+
 	releaseFrog: function() {
 		// Open the gate
 		this.castle.openGate();
@@ -78,9 +83,17 @@ KnugenGame.Game.prototype = {
 		// Spawn a frog
 		this.physicalGroup.add(new Frog(this.game, this.castle.centerFloor, this.physicalGroup, this.knugen));
 
+		this.nrOfReleasedFrogs++;
+
+		if (this.nrOfReleasedFrogs >= this.nextSuperCrown) {
+			this.nextSuperCrown += this.nextSuperCrown;
+			this.crowns.spawnSuperCrown();
+		}
+
 		// close gate
 		this.game.time.events.add(Phaser.Timer.SECOND*1.5, this.castle.closeGate, this.castle);
 	},
+
 	collectCrown: function(collector, crown) {
 		if(collector.knugen){
 			if(crown.super){
@@ -91,10 +104,11 @@ KnugenGame.Game.prototype = {
 				this.crownSound.play();
 				this.game.points++;
 				this.pointsText.setText(this.game.points);
+				this.crowns.scheduleNewCrown();
 			}
 		}
+
 		crown.kill();
-		this.crowns.scheduleNewCrown();
 	},
 
 	killKnugen: function(theKnug, stuff) {

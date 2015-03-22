@@ -3,6 +3,7 @@ Crowns = function(game, physicalGroup, knugen) {
    this.game = game;
    this.enableBody = true;
    this.crownSize = 16;
+   this.nextSuperCrown = 10;
 
    this.rectArray = [];
 
@@ -56,12 +57,32 @@ Crowns.prototype.spawnCrown = function() {
    while (1) {
       var index = this.game.rnd.integerInRange(0, this.validPositions.length);
       if (index < this.validPositions.length) {
-         var sprite = this.create(this.validPositions[index].x, this.validPositions[index].y, 'crown');
-         sprite.alpha = 0;
-         sprite.super = true; // Maybe not always..
-         this.game.add.tween(sprite).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
+         this.latestCrown = this.create(this.validPositions[index].x, this.validPositions[index].y, 'crown');
+         this.latestCrown.alpha = 0;
+         this.latestCrown.super = false;
+         this.game.add.tween(this.latestCrown).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
          break;
       }
+   }
+}
+
+Crowns.prototype.spawnSuperCrown = function() {
+   while (1) {
+      var index = this.game.rnd.integerInRange(0, this.validPositions.length);
+      if (index < this.validPositions.length && this.latestCrown.position != this.validPositions[index]) {
+         this.superCrown = this.create(this.validPositions[index].x, this.validPositions[index].y, 'crown');
+         this.superCrown.alpha = 0;
+         this.superCrown.super = true;
+         this.game.add.tween(this.superCrown).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
+         this.game.time.events.add(5000, this.removeSuperCrown, this);
+         break;
+      }
+   }
+}
+
+Crowns.prototype.removeSuperCrown = function() {
+   if (this.superCrown.alive) {
+      this.superCrown.kill();
    }
 }
 
