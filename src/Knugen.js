@@ -114,6 +114,7 @@ Knugen.prototype.setAnimation = function(deg) {
 Knugen.prototype.activateSuperKnugPowers = function() {
    this.super = true;
    this.superSprite.visible = true;
+   this.loadTexture('superKnugen');
 
    if(this.superTween)
       this.superTween.stop();
@@ -142,4 +143,5 @@ Knugen.prototype.deactivateSuperKnugPowers = function() {
    this.super = false;
    this.superTween.stop();
    this.superSprite.visible = false;
+   this.loadTexture('knugen');
 }
