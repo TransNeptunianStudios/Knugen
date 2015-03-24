@@ -21,6 +21,7 @@ KnugenGame.MainMenu.prototype = {
 		this.game.add.tween(startText).from( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true, 1500);
 
 		this.game.input.onDown.add(this.startGame, this);
+		this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).onDown.add(this.startGame, this);
 	},
 	startGame: function() {
 		// start the Game state

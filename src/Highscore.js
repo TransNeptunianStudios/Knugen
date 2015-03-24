@@ -48,6 +48,7 @@ KnugenGame.Highscore.prototype = {
       graphics.alpha = 0.5;
 
       this.game.input.onDown.add(this.gotoCredits, this);
+      this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).onDown.add(this.gotoCredits, this);
    },
    manageHighscore: function(data){
       var highscore;

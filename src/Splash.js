@@ -15,6 +15,7 @@ KnugenGame.Splash.prototype = {
       logoFade.start();
 
       this.game.input.onDown.add(this.startGame, this);
+      this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).onDown.add(this.startGame, this);
    },
    startGame: function() {
       // start the Game state

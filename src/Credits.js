@@ -33,6 +33,7 @@ KnugenGame.Credits.prototype = {
       credits.anchor.setTo(0.5, 0);
 
       this.game.input.onDown.add(this.startGame, this);
+      this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).onDown.add(this.startGame, this);      
    },
    redirect: function(){
       var url = "http://trans-neptunian-studios.com";
