@@ -40,8 +40,10 @@ Knugen.prototype.constructor = Knugen;
 Knugen.prototype.update = function() {
    var distToKnug = this.game.physics.arcade.distanceBetween(this.game.input.activePointer, this);
 
+   // Using mouse
    if (this.game.input.activePointer.isDown
-      && distToKnug > 5) {
+      && distToKnug > 5)
+      {
       var radToPointer = this.game.physics.arcade.angleToPointer(this, this.game.input.activePointer);
       this.body.velocity = this.game.physics.arcade.velocityFromRotation(radToPointer, 60);
       this.setAnimation(Phaser.Math.radToDeg(radToPointer));
@@ -69,43 +71,39 @@ Knugen.prototype.update = function() {
 }
 
 Knugen.prototype.usingKeyboard = function(){
-   var used = false;
-   if(this.cursors.left.isDown){
-      this.body.velocity.x = -60
-      this.animations.play('west');
-      used = true;
-   }
-   else if(this.cursors.right.isDown){
-      this.body.velocity.x = 60
-      this.animations.play('east');
-      used = true;
-   }
-   else
-      this.body.velocity.x = 0;
+   var direction = 0;
 
-   if(this.cursors.up.isDown){
-      this.body.velocity.y = -60
-      this.animations.play('north');
-      used = true;
-   }
-   else if(this.cursors.down.isDown){
-      this.body.velocity.y = 60
-      this.animations.play('south');
-      used = true;
-   }
+   if(this.cursors.down.isDown && this.cursors.right.isDown)
+      direction = 45;
+   else if(this.cursors.down.isDown && this.cursors.left.isDown)
+      direction = 135;
+   else if(this.cursors.up.isDown && this.cursors.left.isDown)
+      direction = -135;
+   else if(this.cursors.up.isDown && this.cursors.right.isDown)
+      direction = -45;
+   else if(this.cursors.right.isDown)
+      direction = 0;
+   else if(this.cursors.left.isDown)
+      direction = 180;
+   else if(this.cursors.up.isDown)
+      direction = -90;
+   else if(this.cursors.down.isDown)
+      direction = 90;
    else
-      this.body.velocity.y = 0;
+      return false;
 
-      return used;
+   this.body.velocity = this.game.physics.arcade.velocityFromRotation(Phaser.Math.degToRad(direction), 60);
+   this.setAnimation(direction);
+
+   return true;
 }
 
 Knugen.prototype.setAnimation = function(deg) {
-
-   if (deg < -45.0 && deg > -135.0)
+   if (deg <= -45.0 && deg >= -135.0)
      this.animations.play('north');
-   else if (deg < -135.0 || deg > 145.0)
+   else if (deg <= -135.0 || deg >= 145.0)
      this.animations.play('west');
-   else if (deg < 145.0 && deg > 45.0)
+   else if (deg <= 145.0 && deg >= 45.0)
      this.animations.play('south');
    else
      this.animations.play('east');
