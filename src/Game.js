@@ -28,6 +28,7 @@ KnugenGame.Game.prototype = {
 		this.knugen = new Knugen(this.game);
 		this.physicalGroup.add(this.knugen);
 		this.deathSound = this.game.add.audio('death', 0.9, false);
+        this.superMusic = this.game.add.audio('superMusic');
 
 		// Create Crowns
 		this.crowns = new Crowns(this.game, this.physicalGroup, this.knugen, 30, 0);

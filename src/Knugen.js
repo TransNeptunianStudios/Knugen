@@ -15,6 +15,8 @@ Knugen = function(game) {
    this.addChild(this.superSprite);
 
    game.physics.arcade.enable(this);
+    
+    this.superMusic = this.game.add.audio('superMusic');
 
    // All animations, frame 0 is "idle"
    this.animations.add('north', [4, 5, 6, 7, 8, 9, 10, 11], 15, true);
@@ -113,6 +115,10 @@ Knugen.prototype.activateSuperKnugPowers = function() {
    this.super = true;
    this.superSprite.visible = true;
    this.loadTexture('superKnugen');
+    
+   this.superMusic.play();
+   this.superMusic.volume();
+    this.game.music.stop();
 
    if(this.superTween)
       this.superTween.stop();
@@ -142,4 +148,7 @@ Knugen.prototype.deactivateSuperKnugPowers = function() {
    this.superTween.stop();
    this.superSprite.visible = false;
    this.loadTexture('knugen');
+    
+    this.superMusic.stop();
+    this.game.music.play();
 }

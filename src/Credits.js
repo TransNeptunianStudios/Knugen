@@ -20,14 +20,14 @@ KnugenGame.Credits.prototype = {
 
       // Credits headers
       var headerStyle = { font: "Bold 13px Arial", fill: "#000000", align: "center" };
-      var text = "Kod\n\n\n\nGrafik\n\n\nMusik\n\n\nLjud";
+      var text = "Kod\n\n\n\nGrafik\n\n\nMusik\n\n\n\nLjud";
       var style = { font: "14px Arial", fill: "#000000", align: "center" };
       var credits = this.game.add.text(KnugenGame.WIDTH/2, 90, text, headerStyle);
       credits.anchor.setTo(0.5, 0);
 
       // Credits
       var creditStyle = { font: "Italic 13px Arial", fill: "#000000", align: "center" };
-      var text = "\nRobin Reicher\nMikael Larsson\n\n\nDavid Levi\n\n\n\"Minstrel Guild\" Kevin MacLeod\n\n\n\"Alien Amphibians\" - WeldonSmith\nSFXR";
+      var text = "\nRobin Reicher\nMikael Larsson\n\n\nDavid Levi\n\n\n\"Minstrel Guild\" & \"Pinball Spring 160\"\n Kevin MacLeod\n\n\n\"Alien Amphibians\" - WeldonSmith\nSFXR";
       var style = { font: "13px Arial", fill: "#000000", align: "center" };
       var credits = this.game.add.text(KnugenGame.WIDTH/2, 90, text, creditStyle);
       credits.anchor.setTo(0.5, 0);

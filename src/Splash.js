@@ -1,4 +1,4 @@
-KnugenGame.Splash = function(game){
+KnugenGame.Splash = function (game) {
 };
 KnugenGame.Splash.prototype = {
    create: function(){
@@ -7,8 +7,8 @@ KnugenGame.Splash.prototype = {
       logo.anchor.setTo(0.5);
       logo.scale.setTo(0.6);
 
-      var music = this.game.add.audio('bgMusic', 0.7, true);
-      //music.play();
+      this.game.music = this.game.add.audio('bgMusic', 0.7, true);
+      this.game.music.play();
 
       var logoFade = this.game.add.tween(logo).to({alpha: 0}, 1000, Phaser.Easing.Linear.None, false, 3000);
       logoFade.onComplete.add(this.startGame, this);
