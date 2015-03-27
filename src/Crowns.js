@@ -1,4 +1,4 @@
-Crowns = function(game, physicalGroup, knugen) {
+Crowns = function (game, physicalGroup, knugen) {
    Phaser.Group.call(this, game);
    this.game = game;
    this.enableBody = true;
@@ -23,7 +23,7 @@ Crowns = function(game, physicalGroup, knugen) {
 
    this.validPositions = [];
 
-   for (var i = 0; i < game.width-this.crownSize; i++) {
+   for ( var i = 0; i < game.width-this.crownSize; i++) {
       for (var j = 0; j < game.height-this.crownSize; j++) {
 
          var tmp = new Phaser.Rectangle(i, j, this.crownSize, this.crownSize);
