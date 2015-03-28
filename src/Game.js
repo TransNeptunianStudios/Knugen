@@ -61,8 +61,6 @@ KnugenGame.Game.prototype = {
 
 		this.game.physics.arcade.overlap(this.knugen, this.physicalGroup, this.killKnugen, null, this);
 
-		this.game.physics.arcade.collide(this.physicalGroup, this.castle);
-
 		this.game.physics.arcade.collide(this.physicalGroup, this.physicalGroup, null, function(obj1, obj2) {
 			return this.handleFrogCollision(obj1, obj2);
 		}, this);
@@ -116,11 +114,11 @@ KnugenGame.Game.prototype = {
 		if(stuff.frog){
 			if(theKnug.super){
 				this.frogDeath.play();
-				stuff.kill();
+				stuff.explode();
 			}
 			else{
 				this.deathSound.play();
-				theKnug.kill();
+				theKnug.destroy();
 				this.state.start('GameOver');
 			}
 		}

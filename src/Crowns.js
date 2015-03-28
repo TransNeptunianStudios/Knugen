@@ -3,7 +3,7 @@ Crowns = function (game, physicalGroup, knugen) {
    this.game = game;
    this.enableBody = true;
    this.crownSize = 16;
-   this.nextSuperCrown = 7;
+   this.nextSuperCrown = 1;
 
    this.rectArray = [];
 

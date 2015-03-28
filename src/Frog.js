@@ -1,47 +1,46 @@
-Frog = function(game, pos, physicalGroup, knugen) {
-   this.game = game;
-   this.knugen = knugen;
-   this.speed = 30;
-   this.frog = true;
-   this.physicalGroup = physicalGroup;
-   this.croakSound = this.game.add.audio('croak', 0.9, false);
+Frog = function (game, pos, physicalGroup, knugen) {
+    this.game = game;
+    this.knugen = knugen;
+    this.speed = 30;
+    this.frog = true;
+    this.physicalGroup = physicalGroup;
+    this.croakSound = this.game.add.audio('croak', 0.9, false);
 
-   bmd = game.make.bitmapData(360, 16);
-   bmd.load('frog');
-   // Color tone
-   var tonesList =[{r: 128, g: 255, b: 0},
-                   {r: 58, g: 205, b: 100},
-                  {r: 150, g: 150, b: 0}
-                  ];
-   var tone = game.rnd.pick(tonesList);
-   bmd.replaceRGB(255, 150, 255, 255,
-                  tone.r,tone.g, tone.b, 255);
-   game.cache.addSpriteSheet('dynamic', '', bmd.canvas, 15, 14, 24, 0, 0);
-   Phaser.Sprite.call(this, game, pos.x, pos.y-1, 'dynamic');
+    var bmd = game.make.bitmapData(360, 16);
+    bmd.load('frog');
+    // Color tone
+    var tonesList = [{r: 128, g: 255, b: 0},
+                    {r: 58, g: 205, b: 100},
+                    {r: 150, g: 150, b: 0}
+                    ];
+    var tone = game.rnd.pick(tonesList);
+    bmd.replaceRGB(255, 150, 255, 255,
+                  tone.r, tone.g, tone.b, 255);
+    game.cache.addSpriteSheet('dynamic', '', bmd.canvas, 15, 14, 24, 0, 0);
+    Phaser.Sprite.call(this, game, pos.x, pos.y - 1, 'dynamic');
 
-   game.add.existing(this);
-   game.physics.arcade.enable(this);
+    game.add.existing(this);
+    game.physics.arcade.enable(this);
 
-   // All animations, frame 0 is "idle"
-   this.animations.add('north', [4, 5, 6, 7, 8], 10, true);
-   this.animations.add('west', [9, 10, 11, 12, 13], 10, true);
-   this.animations.add('south', [14, 15, 16, 17, 18], 10, true);
-   this.animations.add('east', [19, 20, 21, 22, 23], 10, true);
-   this.frame = 2;
+	// All animations, frame 0 is "idle"
+	this.animations.add('north', [4, 5, 6, 7, 8], 10, true);
+	this.animations.add('west', [9, 10, 11, 12, 13], 10, true);
+	this.animations.add('south', [14, 15, 16, 17, 18], 10, true);
+	this.animations.add('east', [19, 20, 21, 22, 23], 10, true);
+	this.frame = 2;
 
-   this.anchor.setTo(0.5, 1);
-   this.body.collideWorldBounds = true;
-   this.body.height = 9;
-   this.body.width = 14;
+	this.anchor.setTo(0.5, 1);
+	this.body.collideWorldBounds = true;
+	this.body.height = 9;
+	this.body.width = 14;
 
-   this.allLines = [];
+    this.allLines = [];
 
-   this.physicalGroup.forEach(function(sprite) {
-      if (!sprite.frog && !sprite.knugen) {
+    this.physicalGroup.forEach (function (sprite) {
+       if (!sprite.frog && !sprite.knugen) {
 
-         topLeftCoord = Utils.getTopLeft(sprite);
-
-         this.allLines.push(new Phaser.Line(topLeftCoord.x,
+          topLeftCoord = Utils.getTopLeft(sprite);
+          this.allLines.push(new Phaser.Line(topLeftCoord.x,
                                             topLeftCoord.y,
                                             topLeftCoord.x + sprite.body.width,
                                             topLeftCoord.y));
@@ -78,10 +77,10 @@ Frog.prototype.firstJump = function() {
    this.setAnimation(90);
 
    this.croak();
-   this.game.time.events.add(1000, this.setIdle, this);
+   this.idleTimer = this.game.time.events.add(1000, this.setIdle, this);
 }
 
-Frog.prototype.jump = function() {
+Frog.prototype.jump = function () {
 
    var degStep = 1;
    var rotStart = 0;
@@ -129,10 +128,10 @@ Frog.prototype.jump = function() {
 
    this.setAnimation(Phaser.Math.radToDeg(Phaser.Math.normalizeAngle(this.angle)));
    this.croak();
-   this.game.time.events.add(1000, this.setIdle, this);
+   this.idleTimer = this.game.time.events.add(1000, this.setIdle, this);
 }
 
-Frog.prototype.setIdle = function(){
+Frog.prototype.setIdle = function(forGood){
    this.body.velocity.x = 0;
    this.body.velocity.y = 0;
 
@@ -153,8 +152,20 @@ Frog.prototype.setIdle = function(){
    this.animations.stop();
 
    // setup next jump
-   var nextJump = this.game.rnd.integerInRange(500, 2000);
-   this.game.time.events.add(nextJump, this.jump, this);
+	if(!forGood){
+   		var nextJump = this.game.rnd.integerInRange(500, 2000);
+   		this.jumpTimer = this.game.time.events.add(nextJump, this.jump, this);
+	}
+}
+
+Frog.prototype.explode = function() {
+	this.body.enable = false;
+	this.setIdle(true);
+	
+	this.game.time.events.remove(this.idleTimer);
+	this.game.time.events.remove(this.jumpTimer);	
+	
+	this.destroy();
 }
 
 Frog.prototype.setAnimation = function(deg) {
@@ -204,7 +215,6 @@ Frog.prototype.updateLines = function(angle) {
    this.line1.fromAngle(line1Start.x, line1Start.y, angle, this.speed);
    this.line2.fromAngle(line2Start.x, line2Start.y, angle, this.speed);   
 }
-
 // Frog.prototype.render = function() {
 //    this.game.debug.body(this);
 //    this.game.debug.geom(this.line1);

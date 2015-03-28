@@ -1,14 +1,12 @@
-KnugenGame.Preloader = function(game){
+KnugenGame.Preloader = function (game) {
 	KnugenGame.WIDTH = 240;
 	KnugenGame.HEIGHT = 400;
 };
 KnugenGame.Preloader.prototype = {
-	preload: function(){
+	preload: function () {
 		// set background color and preload image
 		this.stage.backgroundColor = '#000000';
-		this.preloadBar = this.add.sprite( (KnugenGame.WIDTH-311)/2
-													, (KnugenGame.HEIGHT-27)/2
-													, 'preloaderBar');
+		this.preloadBar = this.add.sprite( ( KnugenGame.WIDTH-311) / 2, (KnugenGame.HEIGHT-27)/2, 'preloaderBar');
 
 		this.load.setPreloadSprite(this.preloadBar);
 
