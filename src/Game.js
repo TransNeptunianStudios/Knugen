@@ -86,7 +86,6 @@ KnugenGame.Game.prototype = {
 		if (this.nrOfReleasedFrogs >= this.crowns.nextSuperCrown) {
 			this.crowns.nextSuperCrown += this.crowns.nextSuperCrown;
 			this.crowns.spawnSuperCrown();
-			console.log("SUPER");
 		}
 
 		// close gate
