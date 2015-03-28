@@ -117,7 +117,7 @@ Knugen.prototype.activateSuperKnugPowers = function() {
    this.loadTexture('superKnugen');
     
    this.superMusic.play();
-    this.game.music.stop();
+   this.game.music.volume = 0.0;
 
    if(this.superTween)
       this.superTween.stop();
@@ -149,5 +149,5 @@ Knugen.prototype.deactivateSuperKnugPowers = function() {
    this.loadTexture('knugen');
     
     this.superMusic.stop();
-    this.game.music.play();
+	this.game.add.tween(this.game.music).to({volume: 1.0}, 2000, Phaser.Easing.Linear.none).start();
 }
