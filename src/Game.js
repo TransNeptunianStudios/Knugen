@@ -92,8 +92,6 @@ KnugenGame.Game.prototype = {
 			this.crowns.nextSuperCrown += this.crowns.superCrownInterval;
 			this.crowns.spawnSuperCrown();			
 		}
-		console.log("frog " + this.nrOfReleasedFrogs);
-		console.log("Next super " + this.crowns.nextSuperCrown);
 
 		// close gate
 		this.game.time.events.add(Phaser.Timer.SECOND * 1.5, this.castle.closeGate, this.castle);
