@@ -88,9 +88,12 @@ KnugenGame.Game.prototype = {
 		this.nrOfReleasedFrogs++;
 
 		if (this.nrOfReleasedFrogs >= this.crowns.nextSuperCrown) {
-			this.crowns.nextSuperCrown += this.crowns.nextSuperCrown;
-			this.crowns.spawnSuperCrown();
+			this.crowns.superCrownInterval += 1;
+			this.crowns.nextSuperCrown += this.crowns.superCrownInterval;
+			this.crowns.spawnSuperCrown();			
 		}
+		console.log("frog " + this.nrOfReleasedFrogs);
+		console.log("Next super " + this.crowns.nextSuperCrown);
 
 		// close gate
 		this.game.time.events.add(Phaser.Timer.SECOND * 1.5, this.castle.closeGate, this.castle);
@@ -119,7 +122,7 @@ KnugenGame.Game.prototype = {
 				stuff.explode();
 			} else {
 				this.deathSound.play();
-				theKnug.destroy();
+				//theKnug.kill();
 				this.state.start('GameOver');
 			}
 		}
