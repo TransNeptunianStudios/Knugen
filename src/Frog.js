@@ -123,6 +123,10 @@ Frog.prototype.jump = function () {
 	if (this.knugen.super) {
 		this.angle += Math.PI;
 	}
+	
+	// Add a bit of random
+	var diff = Math.PI / 4;
+	this.angle += this.game.rnd.integerInRange(-diff/2, diff/2);
 
 	this.updateLines(this.angle);
 
