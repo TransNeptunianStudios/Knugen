@@ -87,7 +87,8 @@ KnugenGame.Highscore.prototype = {
 
 			var newEntry = {
 				nick: nick,
-				score: this.game.points.toString()};
+				score: this.game.points.toString()
+			};
 			$.ajax({
 				url: "php/setHighscore.php",
 				type: "POST",
@@ -116,13 +117,13 @@ KnugenGame.Highscore.prototype = {
 			style.fill = "#FF0000";
 
 		var y = 30 + (place * 23);
-		
-		if(place % 2 != 0){
+
+		if (place % 2 != 0) {
 			var graphics = this.game.add.graphics(10, 0);
 			graphics.beginFill(0xFFFFFF, 0.5);
-			graphics.drawRect(0, y-3, 220, 21);
+			graphics.drawRect(0, y - 3, 220, 21);
 		}
-    
+
 
 		this.game.add.text(20, y, place, style);
 		this.game.add.text(80, y, entry.nick, style);
