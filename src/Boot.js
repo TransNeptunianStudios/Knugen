@@ -1,11 +1,11 @@
 var KnugenGame = {};
-KnugenGame.Boot = function(game){};
+KnugenGame.Boot = function (game) {};
 KnugenGame.Boot.prototype = {
-	preload: function(){
+	preload: function () {
 		// preload the loading indicator first before anything else
 		this.load.image('preloaderBar', 'assets/Loading_bar.png');
 	},
-	create: function(){
+	create: function () {
 		// set scale options
 		this.input.maxPointers = 1;
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;

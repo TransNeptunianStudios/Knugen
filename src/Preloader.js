@@ -6,7 +6,7 @@ KnugenGame.Preloader.prototype = {
 	preload: function () {
 		// set background color and preload image
 		this.stage.backgroundColor = '#000000';
-		this.preloadBar = this.add.sprite( ( KnugenGame.WIDTH-311) / 2, (KnugenGame.HEIGHT-27)/2, 'preloaderBar');
+		this.preloadBar = this.add.sprite((KnugenGame.WIDTH - 311) / 2, (KnugenGame.HEIGHT - 27) / 2, 'preloaderBar');
 
 		this.load.setPreloadSprite(this.preloadBar);
 
@@ -37,7 +37,7 @@ KnugenGame.Preloader.prototype = {
 		// Load music
 		//  Firefox doesn't support mp3 files, so use ogg
 		this.load.audio('bgMusic', 'assets/audio/Minstrel_Guild.ogg');
-		this.load.audio('superMusic', 'assets/audio/Pinball_Spring_160.ogg');        
+		this.load.audio('superMusic', 'assets/audio/Pinball_Spring_160.ogg');
 		this.load.audio('croak', 'assets/audio/13598_weldonsmith_frog1alien.ogg');
 		this.load.audio('crown', 'assets/audio/Crown.ogg');
 		this.load.audio('superCrown', 'assets/audio/SuperCrown.ogg');
@@ -45,7 +45,7 @@ KnugenGame.Preloader.prototype = {
 		this.load.audio('death', 'assets/audio/Death.ogg');
 		this.load.audio('frogDeath', 'assets/audio/FrogExplosion.ogg');
 	},
-	create: function(){
+	create: function () {
 		// start the MainMenu state
 		this.state.start('Splash');
 	}

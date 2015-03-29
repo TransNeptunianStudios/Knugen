@@ -1,9 +1,9 @@
-KnugenGame.Game = function(game){
+KnugenGame.Game = function (game) {
 
 };
 
 KnugenGame.Game.prototype = {
-	create: function(){
+	create: function () {
 
 		// Add physics
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -28,7 +28,7 @@ KnugenGame.Game.prototype = {
 		this.knugen = new Knugen(this.game);
 		this.physicalGroup.add(this.knugen);
 		this.deathSound = this.game.add.audio('death', 0.9, false);
-        this.superMusic = this.game.add.audio('superMusic');
+		this.superMusic = this.game.add.audio('superMusic');
 
 		// Create Crowns
 		this.crowns = new Crowns(this.game, this.physicalGroup, this.knugen, 30, 0);
@@ -40,16 +40,20 @@ KnugenGame.Game.prototype = {
 
 		this.game.points = 0;
 		var crown = this.game.add.sprite(2, 2, 'crown');
-		var style = { font: "14px Arial", fill: "#000000", align: "center" };
+		var style = {
+			font: "14px Arial",
+			fill: "#000000",
+			align: "center"
+		};
 		this.pointsText = this.game.add.text(20, 3, '', style);
 		this.pointsText.setText(this.game.points); // why is this needed?
 
 		this.nrOfReleasedFrogs = 0;
 
-		this.game.time.events.loop(Phaser.Timer.SECOND*5, this.releaseFrog, this);
+		this.game.time.events.loop(Phaser.Timer.SECOND * 5, this.releaseFrog, this);
 	},
 
-	update: function() {
+	update: function () {
 
 		// Only needs to be called after each crown is created...but hard
 		this.game.world.bringToTop(this.physicalGroup);
@@ -61,19 +65,19 @@ KnugenGame.Game.prototype = {
 
 		this.game.physics.arcade.overlap(this.knugen, this.physicalGroup, this.killKnugen, null, this);
 
-		this.game.physics.arcade.collide(this.physicalGroup, this.physicalGroup, null, function(obj1, obj2) {
+		this.game.physics.arcade.collide(this.physicalGroup, this.physicalGroup, null, function (obj1, obj2) {
 			return this.handleFrogCollision(obj1, obj2);
 		}, this);
 
 		// depth sorting
-		this.physicalGroup .sort('y', Phaser.Group.SORT_DECENDING);
+		this.physicalGroup.sort('y', Phaser.Group.SORT_DECENDING);
 	},
 
-	handleFrogCollision: function(first, second) {
+	handleFrogCollision: function (first, second) {
 		return !(first.frog && second.frog);
 	},
 
-	releaseFrog: function() {
+	releaseFrog: function () {
 		// Open the gate
 		this.castle.openGate();
 		this.gateSound.play();
@@ -89,16 +93,15 @@ KnugenGame.Game.prototype = {
 		}
 
 		// close gate
-		this.game.time.events.add(Phaser.Timer.SECOND*1.5, this.castle.closeGate, this.castle);
+		this.game.time.events.add(Phaser.Timer.SECOND * 1.5, this.castle.closeGate, this.castle);
 	},
 
-	collectCrown: function(collector, crown) {
-		if(collector.knugen){
-			if(crown.super){
+	collectCrown: function (collector, crown) {
+		if (collector.knugen) {
+			if (crown.super) {
 				this.superCrownSound.play();
 				this.knugen.activateSuperKnugPowers();
-			}
-			else{
+			} else {
 				this.crownSound.play();
 				this.game.points++;
 				this.pointsText.setText(this.game.points);
@@ -109,13 +112,12 @@ KnugenGame.Game.prototype = {
 		crown.kill();
 	},
 
-	killKnugen: function(theKnug, stuff) {
-		if(stuff.frog){
-			if(theKnug.super){
+	killKnugen: function (theKnug, stuff) {
+		if (stuff.frog) {
+			if (theKnug.super) {
 				this.frogDeath.play();
 				stuff.explode();
-			}
-			else{
+			} else {
 				this.deathSound.play();
 				theKnug.destroy();
 				this.state.start('GameOver');
