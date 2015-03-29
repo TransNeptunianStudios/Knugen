@@ -15,7 +15,7 @@ KnugenGame.Highscore.prototype = {
 
 		var graphics = this.game.add.graphics(0, 0);
 		graphics.beginFill(0xFFFFFF, 1);
-		graphics.drawRoundedRect(10, 10, 220, 290, 10);
+		graphics.drawRoundedRect(10, 10, 220, 270, 10);
 		graphics.alpha = 0.5;
 
 		// Header
@@ -87,8 +87,7 @@ KnugenGame.Highscore.prototype = {
 
 			var newEntry = {
 				nick: nick,
-				score: this.game.points
-			};
+				score: this.game.points.toString()};
 			$.ajax({
 				url: "php/setHighscore.php",
 				type: "POST",
@@ -117,8 +116,17 @@ KnugenGame.Highscore.prototype = {
 			style.fill = "#FF0000";
 
 		var y = 30 + (place * 23);
+		
+		if(place % 2 != 0){
+			var graphics = this.game.add.graphics(10, 0);
+			graphics.beginFill(0xFFFFFF, 0.5);
+			graphics.drawRect(0, y-3, 220, 21);
+		}
+    
+
 		this.game.add.text(20, y, place, style);
 		this.game.add.text(80, y, entry.nick, style);
+		//this.game.add.text(200, y, entry.score, style);
 		this.game.add.text(200, y, entry.score, style);
 	},
 	compareScore: function (score) {
