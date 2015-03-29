@@ -12,7 +12,9 @@ Knugen = function (game) {
 	this.superSprite.anchor.setTo(0.5, 1);
 	this.superSprite.alpha = 0.0;
 	this.superSprite.visible = false;
-	this.addChild(this.superSprite);
+	this.addChild(this.superSprite);	   
+	this.superSprite.animations.add('shine');
+   	this.superSprite.animations.play('shine', 10, true);
 
 	game.physics.arcade.enable(this);
 

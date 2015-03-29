@@ -31,6 +31,7 @@ KnugenGame.Preloader.prototype = {
 
 		// load spritesheets
 		this.load.spritesheet('knugen', 'assets/Knugen.png', 17, 32);
+		this.load.spritesheet('aura', 'assets/Aura.png', 20, 40);
 		this.load.spritesheet('superKnugen', 'assets/SuperKnugen.png', 17, 32);
 		this.load.spritesheet('fountainBig', 'assets/Hero fountain.png', 50, 50);
 
