@@ -80,22 +80,24 @@ KnugenGame.Highscore.prototype = {
 		if (highscore.length < 10 || this.game.points > highscore[9].score) {
 
 			var nick = prompt("Grattis! Skriv in namn för att hamna på topplistan!", "Knugen");
-			while (nick.length > 15) {
+			while (nick && nick.length > 15) {
 				alert("Max 15 tecken!");
 				nick = prompt("Skriv in namn för highscore", "Knugen");
 			}
-
-			var newEntry = {
-				nick: nick,
-				score: this.game.points.toString()
-			};
-			$.ajax({
-				url: "php/setHighscore.php",
-				type: "POST",
-				data: newEntry
-			});
-			newEntry.isPlayer = true;
-			highscore.push(newEntry);
+			
+			if(nick){
+				var newEntry = {
+					nick: nick,
+					score: this.game.points.toString()
+				};
+				$.ajax({
+					url: "php/setHighscore.php",
+					type: "POST",
+					data: newEntry
+				});
+				newEntry.isPlayer = true;
+				highscore.push(newEntry);
+			}
 		}
 
 		// Sort list
