@@ -75,7 +75,7 @@ Crowns.prototype.spawnSuperCrown = function() {
          this.superCrown.alpha = 0;
          this.superCrown.super = true;
          this.game.add.tween(this.superCrown).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
-         this.game.time.events.add(5000, this.removeSuperCrown, this);
+         this.game.time.events.add(8000, this.removeSuperCrown, this);
          break;
       }
    }
