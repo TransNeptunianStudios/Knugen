@@ -108,8 +108,8 @@ Frog.prototype.jump = function () {
 	var degStep = 1;
 	var rotStart = 0;
 	var changeDir = false;
-   var totalAdded = 0;
-   var diff = 0;
+	var totalAdded = 0;
+	var diff = 0;
 
 	if (Phaser.Math.chanceRoll()) {
 		rotStart = 1;
@@ -117,18 +117,16 @@ Frog.prototype.jump = function () {
 		rotStart = -1;
 	}
 
-	
-
 	this.angle = this.game.physics.arcade.angleBetween(Utils.getTopLeft(this),
 		Utils.getTopLeft(this.knugen));
 
 	if (this.knugen.super) {
 		this.angle += Math.PI;
-      diff = Phaser.Math.degToRad(45.0);
+		diff = Phaser.Math.degToRad(45.0);
 	}
-   else {
-      diff = Phaser.Math.degToRad(10.0);
-   }
+	else {
+		diff = Phaser.Math.degToRad(10.0);
+	}
 	
 	// Add a bit of random
 	this.angle += this.game.rnd.integerInRange(-diff/2, diff/2);
