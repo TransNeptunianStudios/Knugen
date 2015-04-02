@@ -2,7 +2,7 @@ Knugen = function (game) {
 
 	this.knugen = true;
 
-	if (this.isVickan)
+	if (this.isVickan())
 		Phaser.Sprite.call(this, game, game.world.width / 2, game.world.height / 2, 'vickan');
 	else
 		Phaser.Sprite.call(this, game, game.world.width / 2, game.world.height / 2, 'knugen');
@@ -117,7 +117,7 @@ Knugen.prototype.activateSuperKnugPowers = function () {
 	this.super = true;
 	this.superSprite.visible = true;
 
-	if (this.isVickan)
+	if (this.isVickan())
 		this.loadTexture('superVickan');
 	else
 		this.loadTexture('superKnugen');
@@ -151,22 +151,12 @@ Knugen.prototype.superWarning = function () {
 	this.superTimer = this.game.time.events.add(Phaser.Timer.SECOND * 2, this.deactivateSuperKnugPowers, this);
 }
 
-Knugen.prototype.isVickan = function () {
-	if (!this.supports_html5_storage()) {
-		console.log("NOO");
-		return false;
-	}
-
-	return 12 == JSON.parse(localStorage.getItem("Frogs"));
-}
-
-
 Knugen.prototype.deactivateSuperKnugPowers = function () {
 	this.super = false;
 	this.superTween.stop();
 	this.superSprite.visible = false;
 	
-	if (this.isVickan)
+	if (this.isVickan())
 		this.loadTexture('vickan');
 	else
 		this.loadTexture('knugen');
@@ -174,4 +164,24 @@ Knugen.prototype.deactivateSuperKnugPowers = function () {
 	this.game.add.tween(this.game.music).to({
 		volume: 1.0
 	}, 2000, Phaser.Easing.Linear.none).start();
+}
+
+
+Knugen.prototype.isVickan = function () {
+	if (!this.supports_html5_storage()) {
+		console.log("NOO");
+		return false;
+	}
+	
+	var frogs =  JSON.parse(localStorage.getItem("Frogs"));
+
+	return frogs && frogs.size == 12;
+}
+
+Knugen.prototype.supports_html5_storage =  function () {
+	try {
+		return 'localStorage' in window && window['localStorage'] !== null;
+	} catch (e) {
+		return false;
+	}
 }
