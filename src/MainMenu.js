@@ -13,7 +13,7 @@ KnugenGame.MainMenu.prototype = {
 		var startText = this.game.add.text(KnugenGame.WIDTH/2, 195, text, style);
 		startText.anchor.setTo(0.5, 0);
 
-		var text = "Version: 0.6 Beta";
+		var text = "Version: 1.0";
 		var style = { font: "10px Arial", fill: "#000000", align: "center" };
 		var version = this.game.add.text(5, 385, text, style);
 
