@@ -2,7 +2,10 @@ Knugen = function (game) {
 
 	this.knugen = true;
 
-	Phaser.Sprite.call(this, game, game.world.width / 2, game.world.height / 2, 'knugen');
+	if (this.isVickan)
+		Phaser.Sprite.call(this, game, game.world.width / 2, game.world.height / 2, 'vickan');
+	else
+		Phaser.Sprite.call(this, game, game.world.width / 2, game.world.height / 2, 'knugen');
 
 	game.add.existing(this);
 
@@ -12,9 +15,9 @@ Knugen = function (game) {
 	this.superSprite.anchor.setTo(0.5, 1);
 	this.superSprite.alpha = 0.0;
 	this.superSprite.visible = false;
-	this.addChild(this.superSprite);	   
+	this.addChild(this.superSprite);
 	this.superSprite.animations.add('shine');
-   	this.superSprite.animations.play('shine', 10, true);
+	this.superSprite.animations.play('shine', 10, true);
 
 	game.physics.arcade.enable(this);
 
@@ -113,7 +116,11 @@ Knugen.prototype.setAnimation = function (deg) {
 Knugen.prototype.activateSuperKnugPowers = function () {
 	this.super = true;
 	this.superSprite.visible = true;
-	this.loadTexture('superKnugen');
+
+	if (this.isVickan)
+		this.loadTexture('superVickan');
+	else
+		this.loadTexture('superKnugen');
 
 	this.superMusic.play();
 	this.game.music.volume = 0.0;
@@ -144,13 +151,25 @@ Knugen.prototype.superWarning = function () {
 	this.superTimer = this.game.time.events.add(Phaser.Timer.SECOND * 2, this.deactivateSuperKnugPowers, this);
 }
 
+Knugen.prototype.isVickan = function () {
+	if (!this.supports_html5_storage()) {
+		console.log("NOO");
+		return false;
+	}
+
+	return 12 == JSON.parse(localStorage.getItem("Frogs"));
+}
+
 
 Knugen.prototype.deactivateSuperKnugPowers = function () {
 	this.super = false;
 	this.superTween.stop();
 	this.superSprite.visible = false;
-	this.loadTexture('knugen');
-
+	
+	if (this.isVickan)
+		this.loadTexture('vickan');
+	else
+		this.loadTexture('knugen');
 	this.superMusic.stop();
 	this.game.add.tween(this.game.music).to({
 		volume: 1.0
