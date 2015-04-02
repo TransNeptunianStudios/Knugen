@@ -3,8 +3,8 @@ Crowns = function (game, physicalGroup, knugen) {
    this.game = game;
    this.enableBody = true;
    this.crownSize = 16;
-   this.nextSuperCrown = 4; // First crown
-   this.superCrownInterval = 4;	
+   this.nextSuperCrown = 6; // First crown
+   this.superCrownInterval = 6;	
 
    this.rectArray = [];
 
@@ -75,7 +75,7 @@ Crowns.prototype.spawnSuperCrown = function() {
          this.superCrown.alpha = 0;
          this.superCrown.super = true;
          this.game.add.tween(this.superCrown).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
-         this.game.time.events.add(8000, this.removeSuperCrown, this);
+         this.game.time.events.add(7000, this.removeSuperCrown, this);
          break;
       }
    }
