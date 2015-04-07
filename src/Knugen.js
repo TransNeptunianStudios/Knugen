@@ -175,7 +175,7 @@ Knugen.prototype.isVickan = function () {
 	
 	var frogs =  JSON.parse(localStorage.getItem("Frogs"));
 
-	return frogs && frogs.size == 12;
+	return frogs && frogs.length == grodor.length;
 }
 
 Knugen.prototype.supports_html5_storage =  function () {
