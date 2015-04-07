@@ -128,7 +128,7 @@ KnugenGame.Highscore.prototype = {
 
 
 		this.game.add.text(20, y, place, style);
-		this.game.add.text(80, y, entry.nick, style);
+		this.game.add.text(40, y, entry.nick, style);
 		//this.game.add.text(200, y, entry.score, style);
 		this.game.add.text(200, y, entry.score, style);
 	},
