@@ -84,16 +84,25 @@ KnugenGame.Highscore.prototype = {
 				alert("Max 15 tecken!");
 				nick = prompt("Skriv in namn för highscore", "Knugen");
 			}
-			
-			if(nick){
+
+			if (nick) {
 				var newEntry = {
 					nick: nick,
 					score: this.game.points.toString()
 				};
+
 				$.ajax({
-					url: "php/setHighscore.php",
+					url: "php/dealer.php",
 					type: "POST",
-					data: newEntry
+					data: newEntry,
+					success: function (result) {
+						newEntry.hash = result;
+						$.ajax({
+							url: "php/setHighscore.php",
+							type: "POST",
+							data: newEntry
+						});
+					}
 				});
 				newEntry.isPlayer = true;
 				highscore.push(newEntry);
@@ -126,10 +135,8 @@ KnugenGame.Highscore.prototype = {
 			graphics.drawRect(0, y - 3, 220, 21);
 		}
 
-
 		this.game.add.text(20, y, place, style);
-		this.game.add.text(40, y, entry.nick, style);
-		//this.game.add.text(200, y, entry.score, style);
+		this.game.add.text(50, y, entry.nick, style);
 		this.game.add.text(200, y, entry.score, style);
 	},
 	compareScore: function (score) {
